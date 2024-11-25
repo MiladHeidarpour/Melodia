@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
@@ -9,11 +9,17 @@
   <ItemGroup>
     <Folder Include="Artists\Create\" />
     <Folder Include="Artists\Edit\" />
+    <Folder Include="Artists\Delete\" />
     <Folder Include="Artists\Services\" />
-    <Folder Include="Artists\Remove\" />
-    <Folder Include="Categories\Create\" />
-    <Folder Include="Musics\" />
-    <Folder Include="MusicAlbums\" />
+    <Folder Include="Categories\Services\" />
+    <Folder Include="MusicAlbums\Create\" />
+    <Folder Include="MusicAlbums\Delete\" />
+    <Folder Include="MusicAlbums\Edit\" />
+    <Folder Include="MusicAlbums\Services\" />
+    <Folder Include="Musics\Create\" />
+    <Folder Include="Musics\Edit\" />
+    <Folder Include="Musics\Delete\" />
+    <Folder Include="Musics\Services\" />
   </ItemGroup>
 
   <ItemGroup>
