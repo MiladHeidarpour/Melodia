@@ -1,0 +1,24 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="Artists\Create\" />
+    <Folder Include="Artists\Edit\" />
+    <Folder Include="Artists\Services\" />
+    <Folder Include="Artists\Remove\" />
+    <Folder Include="Categories\Create\" />
+    <Folder Include="Musics\" />
+    <Folder Include="MusicAlbums\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Common\Common.Application\Common.Application.csproj" />
+    <ProjectReference Include="..\Proj.Domain\Proj.Domain.csproj" />
+  </ItemGroup>
+
+</Project>
