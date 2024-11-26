@@ -2,6 +2,7 @@
 using Common.Domain.Exceptions;
 using Common.Domain.Utilities;
 using Common.Domain.ValueObjects;
+using Proj.Domain.ArtistAgg;
 using Proj.Domain.MusicAgg;
 using Proj.Domain.MusicAlbumAgg.Services;
 
@@ -17,7 +18,7 @@ public class MusicAlbum : AggregateRoot
     public SeoData SeoData { get; private set; }
     public List<Music> Musics { get; private set; }
 
-    public MusicAlbum(string albumName, string coverImg, TimeSpan albumTime, List<Music> musics, int numberOfSongs, string slug
+    public MusicAlbum(string albumName, string coverImg, TimeSpan albumTime, int numberOfSongs, string slug
         , SeoData seoData, IMusicAlbumDomainService musicAlbumService)
     {
         NullOrEmptyDomainDataException.CheckString(coverImg, nameof(coverImg));
@@ -28,10 +29,9 @@ public class MusicAlbum : AggregateRoot
         NumberOfSongs = numberOfSongs;
         Slug = slug?.ToSlug();
         SeoData = seoData;
-        Musics = musics;
     }
 
-    public void Edit(string albumName, TimeSpan albumTime, List<Music> musics, int numberOfSongs, string slug
+    public void Edit(string albumName, TimeSpan albumTime, int numberOfSongs, string slug
         , SeoData seoData, IMusicAlbumDomainService musicAlbumService)
     {
         Gaurd(albumName, slug, musicAlbumService);
@@ -40,6 +40,9 @@ public class MusicAlbum : AggregateRoot
         NumberOfSongs = numberOfSongs;
         Slug = slug?.ToSlug(); 
         SeoData = seoData;
+    }
+    public void SetAlbumMusics(List<Music> musics)
+    {
         Musics = musics;
     }
 

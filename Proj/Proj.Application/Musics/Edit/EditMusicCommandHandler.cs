@@ -29,7 +29,7 @@ internal class EditMusicCommandHandler : IBaseCommandHandler<EditMusicCommand>
         var music = await _musicRepository.GetTracking(request.MusicId);
 
         if (music == null)
-            return OperationResult.NotFound("موزیک موزد نظر یافت نشد");
+            return OperationResult.NotFound("موزیک مورد نظر یافت نشد");
 
         music.Edit(request.TrackName, request.CategoryId, request.TrackTime, request.RelaseDate,
             request.Lyric, request.IsAlbum, request.Slug, request.SeoData, _musicDomainService);

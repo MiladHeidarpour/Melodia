@@ -8,9 +8,6 @@
 
   <ItemGroup>
     <Folder Include="Categories\Services\" />
-    <Folder Include="MusicAlbums\Create\" />
-    <Folder Include="MusicAlbums\Delete\" />
-    <Folder Include="MusicAlbums\Edit\" />
     <Folder Include="MusicAlbums\Services\" />
     <Folder Include="Musics\Delete\" />
   </ItemGroup>
