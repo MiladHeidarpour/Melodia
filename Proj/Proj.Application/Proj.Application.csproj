@@ -12,10 +12,7 @@
     <Folder Include="MusicAlbums\Delete\" />
     <Folder Include="MusicAlbums\Edit\" />
     <Folder Include="MusicAlbums\Services\" />
-    <Folder Include="Musics\Create\" />
-    <Folder Include="Musics\Edit\" />
     <Folder Include="Musics\Delete\" />
-    <Folder Include="Musics\Services\" />
   </ItemGroup>
 
   <ItemGroup>

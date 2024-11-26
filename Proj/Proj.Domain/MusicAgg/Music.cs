@@ -24,7 +24,6 @@ public class Music : AggregateRoot
 
     private Music()
     {
-        Artists = new List<Artist>();
     }
     public Music(string trackName, string coverImg, long categoryId, string trackFile,
         TimeSpan trackTime, DateTime relaseDate, string? lyric, bool isAlbum,
@@ -43,7 +42,6 @@ public class Music : AggregateRoot
         IsAlbum = isAlbum;
         Slug = slug?.ToSlug();
         SeoData = seoData;
-        Artists = new List<Artist>();
     }
 
     public void Edit(string trackName, long categoryId,
@@ -59,6 +57,11 @@ public class Music : AggregateRoot
         IsAlbum = isAlbum;
         Slug = slug?.ToSlug();
         SeoData = seoData;
+    }
+
+    public void SetMusicArtist(List<Artist> artists)
+    {
+        Artists = artists;
     }
     public void SetMusicCoverImg(string coverImg)
     {
