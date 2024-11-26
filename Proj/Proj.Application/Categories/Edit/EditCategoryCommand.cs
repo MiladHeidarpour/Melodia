@@ -5,4 +5,4 @@ using Proj.Application.Categories.Create;
 
 namespace Proj.Application.Categories.Edit;
 
-public record EditCategoryCommand(long CategoryId, string Title, string Slug, IFormFile ImageName, SeoData SeoData) : IBaseCommand;
+public record EditCategoryCommand(long CategoryId, string Title, string Slug, IFormFile? ImageName, SeoData SeoData) : IBaseCommand;
