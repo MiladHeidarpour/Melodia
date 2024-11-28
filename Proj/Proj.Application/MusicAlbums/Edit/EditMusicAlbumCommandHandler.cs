@@ -57,7 +57,7 @@ internal class EditMusicAlbumCommandHandler : IBaseCommandHandler<EditMusicAlbum
                 f.SeoData,
                 _musicDomainService));
         });
-        musicAlbum.SetAlbumMusics(musics);
+        //musicAlbum.SetAlbumMusics(musics);
 
         await _musicAlbumRepository.Save();
         RemoveOldImage(request.CoverImg, oldCoverImg);

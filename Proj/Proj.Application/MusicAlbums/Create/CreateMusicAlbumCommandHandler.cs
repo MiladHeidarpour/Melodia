@@ -31,23 +31,23 @@ internal class CreateMusicAlbumCommandHandler : IBaseCommandHandler<CreateMusicA
 
         await _musicAlbumRepository.AddAsync(musicAlbum);
 
-        var musics = new List<Music>();
-        request.Musics.ForEach(f =>
-        {
-            musics.Add(new Music(
-                f.TrackName,
-                f.CoverImg,
-                f.CategoryId,
-                f.TrackFile,
-                f.TrackTime,
-                f.RelaseDate,
-                f.Lyric,
-                f.IsAlbum,
-                f.Slug,
-                f.SeoData,
-                _musicDomainService));
-        });
-        musicAlbum.SetAlbumMusics(musics);
+        //var musics = new List<Music>();
+        //request.Musics.ForEach(f =>
+        //{
+        //    musics.Add(new Music(
+        //        f.TrackName,
+        //        f.CoverImg,
+        //        f.CategoryId,
+        //        f.TrackFile,
+        //        f.TrackTime,
+        //        f.RelaseDate,
+        //        f.Lyric,
+        //        f.IsAlbum,
+        //        f.Slug,
+        //        f.SeoData,
+        //        _musicDomainService));
+        //});
+        //musicAlbum.SetAlbumMusics(musics);
 
         await _musicAlbumRepository.Save();
         return OperationResult.Success("موزیک با موفقیت ثبت شد");

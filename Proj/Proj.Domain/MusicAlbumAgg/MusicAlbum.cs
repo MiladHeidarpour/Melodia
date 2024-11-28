@@ -16,7 +16,7 @@ public class MusicAlbum : AggregateRoot
     public int NumberOfSongs { get; private set; }
     public string Slug { get; private set; }
     public SeoData SeoData { get; private set; }
-    public List<Music> Musics { get; private set; }
+    //public List<Music> Musics { get; private set; }
 
     public MusicAlbum(string albumName, string coverImg, TimeSpan albumTime, int numberOfSongs, string slug
         , SeoData seoData, IMusicAlbumDomainService musicAlbumService)
@@ -41,10 +41,10 @@ public class MusicAlbum : AggregateRoot
         Slug = slug?.ToSlug(); 
         SeoData = seoData;
     }
-    public void SetAlbumMusics(List<Music> musics)
-    {
-        Musics = musics;
-    }
+    //public void SetAlbumMusics(List<Music> musics)
+    //{
+    //    Musics = musics;
+    //}
 
     public void SetMusicAlbumCoverImg(string coverImg)
     {

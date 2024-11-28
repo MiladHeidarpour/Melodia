@@ -48,19 +48,19 @@ internal class EditMusicCommandHandler : IBaseCommandHandler<EditMusicCommand>
             music.SetMusicTrackFile(trackFile);
         }
 
-        var artists = new List<Artist>();
-        request.Artists.ForEach(f =>
-        {
-            artists.Add(new Artist(
-                f.ArtistName,
-                f.ArtistImg,
-                f.AboutArtist,
-                f.CategoryId,
-                f.Slug,
-                f.SeoData,
-                _artistDomainService));
-        });
-        music.SetMusicArtist(artists);
+        //var artists = new List<Artist>();
+        //request.Artists.ForEach(f =>
+        //{
+        //    artists.Add(new Artist(
+        //        f.ArtistName,
+        //        f.ArtistImg,
+        //        f.AboutArtist,
+        //        f.CategoryId,
+        //        f.Slug,
+        //        f.SeoData,
+        //        _artistDomainService));
+        //});
+        //music.SetMusicArtist(artists);
 
         await _musicRepository.Save();
         RemoveOldImage(request.CoverImg,oldCoverImg);

@@ -20,7 +20,7 @@ public class Music : AggregateRoot
     public bool IsAlbum { get; private set; }
     public string Slug { get; private set; }
     public SeoData SeoData { get; private set; }
-    public List<Artist> Artists { get; private set; }
+    //public List<Artist> Artists { get; private set; }
 
     private Music()
     {
@@ -59,10 +59,10 @@ public class Music : AggregateRoot
         SeoData = seoData;
     }
 
-    public void SetMusicArtist(List<Artist> artists)
-    {
-        Artists = artists;
-    }
+    //public void SetMusicArtist(List<Artist> artists)
+    //{
+    //    Artists = artists;
+    //}
     public void SetMusicCoverImg(string coverImg)
     {
         NullOrEmptyDomainDataException.CheckString(coverImg, nameof(coverImg));

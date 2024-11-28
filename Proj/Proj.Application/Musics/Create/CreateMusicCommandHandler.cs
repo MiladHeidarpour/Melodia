@@ -33,19 +33,19 @@ internal class CreateMusicCommandHandler : IBaseCommandHandler<CreateMusicComman
 
         await _musicRepository.AddAsync(music);
 
-        var artists = new List<Artist>();
-        request.Artists.ForEach(f =>
-        {
-            artists.Add(new Artist(
-                f.ArtistName,
-                f.ArtistImg,
-                f.AboutArtist,
-                f.CategoryId,
-                f.Slug,
-                f.SeoData,
-                _artistDomainService));
-        });
-        music.SetMusicArtist(artists);
+        //var artists = new List<Artist>();
+        //request.Artists.ForEach(f =>
+        //{
+        //    artists.Add(new Artist(
+        //        f.ArtistName,
+        //        f.ArtistImg,
+        //        f.AboutArtist,
+        //        f.CategoryId,
+        //        f.Slug,
+        //        f.SeoData,
+        //        _artistDomainService));
+        //});
+        //music.SetMusicArtist(artists);
         
         await _musicRepository.Save();
         return OperationResult.Success("موزیک با موفقیت ثبت شد");
