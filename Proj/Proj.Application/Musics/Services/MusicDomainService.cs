@@ -5,15 +5,15 @@ namespace Proj.Application.Musics.Services;
 
 public class MusicDomainService : IMusicDomainService
 {
-    private readonly IMusicRepository _musicRepository;
+    private readonly IMusicRepository _repository;
 
-    public MusicDomainService(IMusicRepository musicRepository)
+    public MusicDomainService(IMusicRepository repository)
     {
-        _musicRepository = musicRepository;
+        _repository = repository;
     }
 
     public bool IsSlugExist(string slug)
     {
-        return _musicRepository.Exists(r => r.Slug == slug);
+        return _repository.Exists(s => s.Slug == slug);
     }
 }

@@ -2,5 +2,5 @@
 
 public interface IArtistDomainService
 {
-    bool IsSlugExsit(string slug);
+    bool IsSlugExist(string slug);
 }

@@ -2,8 +2,8 @@
 using Common.Domain.Exceptions;
 using Common.Domain.Utilities;
 using Common.Domain.ValueObjects;
-using Proj.Domain.ArtistAgg;
 using Proj.Domain.MusicAgg;
+using Proj.Domain.MusicAlbumAgg.Enums;
 using Proj.Domain.MusicAlbumAgg.Services;
 
 namespace Proj.Domain.MusicAlbumAgg;
@@ -12,52 +12,71 @@ public class MusicAlbum : AggregateRoot
 {
     public string AlbumName { get; private set; }
     public string CoverImg { get; private set; }
-    public TimeSpan AlbumTime { get; private set; }
-    public int NumberOfSongs { get; private set; }
+    public long CategoryId { get; private set; }
+    public AlbumType AlbumType { get; private set; }
     public string Slug { get; private set; }
     public SeoData SeoData { get; private set; }
-    //public List<Music> Musics { get; private set; }
+    //public TimeSpan AlbumTime
+    //{
+    //    get
+    //    {
+    //        TimeSpan total = TimeSpan.Zero;
+    //        foreach (var time in Musics.Select(f => f.TrackTime))
+    //        {
+    //            total += time;
+    //        }
 
-    public MusicAlbum(string albumName, string coverImg, TimeSpan albumTime, int numberOfSongs, string slug
-        , SeoData seoData, IMusicAlbumDomainService musicAlbumService)
+    //        return total;
+    //    }
+    //}
+    //public int NumberOfSongs
+    //{
+    //    get
+    //    {
+    //        return Musics.Count(f => f.AlbumId == Id);
+    //    }
+    //}
+
+    private MusicAlbum()
+    {
+
+    }
+    public MusicAlbum(string albumName, string coverImg, long categoryId, AlbumType albumType, string slug,
+        SeoData seoData, IMusicAlbumDomainService domainService)
     {
         NullOrEmptyDomainDataException.CheckString(coverImg, nameof(coverImg));
-        Gaurd(albumName, slug, musicAlbumService);
+        Guard(albumName, slug, domainService);
         AlbumName = albumName;
         CoverImg = coverImg;
-        AlbumTime = albumTime;
-        NumberOfSongs = numberOfSongs;
+        CategoryId = categoryId;
+        AlbumType = albumType;
         Slug = slug?.ToSlug();
         SeoData = seoData;
     }
-
-    public void Edit(string albumName, TimeSpan albumTime, int numberOfSongs, string slug
-        , SeoData seoData, IMusicAlbumDomainService musicAlbumService)
+    public void Edit(string albumName, long categoryId, AlbumType albumType, string slug,
+        SeoData seoData, IMusicAlbumDomainService domainService)
     {
-        Gaurd(albumName, slug, musicAlbumService);
+        Guard(albumName, slug, domainService);
         AlbumName = albumName;
-        AlbumTime = albumTime;
-        NumberOfSongs = numberOfSongs;
-        Slug = slug?.ToSlug(); 
+        CategoryId = categoryId;
+        AlbumType = albumType;
+        Slug = slug?.ToSlug();
         SeoData = seoData;
     }
-    //public void SetAlbumMusics(List<Music> musics)
-    //{
-    //    Musics = musics;
-    //}
-
     public void SetMusicAlbumCoverImg(string coverImg)
     {
         NullOrEmptyDomainDataException.CheckString(coverImg, nameof(coverImg));
         CoverImg = coverImg;
     }
-    public void Gaurd(string albumName, string slug, IMusicAlbumDomainService musicAlbumService)
+
+    //Guard
+    private void Guard(string albumName, string slug, IMusicAlbumDomainService domainService)
     {
         NullOrEmptyDomainDataException.CheckString(albumName, nameof(albumName));
         NullOrEmptyDomainDataException.CheckString(slug, nameof(slug));
         if (slug != Slug)
         {
-            if (musicAlbumService.IsSlugExist(slug) == true)
+            if (domainService.IsSlugExist(slug))
             {
                 throw new SlugIsDuplicateException();
             }

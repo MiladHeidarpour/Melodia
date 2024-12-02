@@ -12,7 +12,8 @@ public class CreateArtistCommandValidator : AbstractValidator<CreateArtistComman
 
         RuleFor(r => r.CategoryId).NotEmpty().WithMessage(ValidationMessages.required("دسته بندی"));
 
-        RuleFor(r => r.ArtistImg).JustImageFile();
+        RuleFor(r => r.ArtistImg).JustImageFile()
+            .NotNull().NotEmpty().WithMessage(ValidationMessages.required("تصویر")); ;
 
         RuleFor(r => r.Slug)
             .NotEmpty().WithMessage(ValidationMessages.required("اسلاگ"));

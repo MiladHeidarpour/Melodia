@@ -17,10 +17,10 @@ public static class InfrastructureBootstrapper
 {
     public static void Init(this IServiceCollection services, string connectionString)
     {
-        services.AddTransient<ICategoryRepository, CategoryRepository>();
         services.AddTransient<IArtistRepository, ArtistRepository>();
-        services.AddTransient<IMusicRepository, MusicRepository>();
+        services.AddTransient<ICategoryRepository, CategoryRepository>();
         services.AddTransient<IMusicAlbumRepository, MusicAlbumRepository>();
+        services.AddTransient<IMusicRepository, MusicRepository>();
 
         services.AddDbContext<ProjContext>(option =>
         {

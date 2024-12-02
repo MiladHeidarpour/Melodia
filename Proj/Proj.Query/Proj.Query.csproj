@@ -6,4 +6,16 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Folder Include="Artists\Mapper\" />
+    <Folder Include="Artists\GetByFilter\" />
+    <Folder Include="Categories\Mapper\" />
+    <Folder Include="Musics\Mapper\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Common\Common.Query\Common.Query.csproj" />
+    <ProjectReference Include="..\Proj.Infrastructure\Proj.Infrastructure.csproj" />
+  </ItemGroup>
+
 </Project>

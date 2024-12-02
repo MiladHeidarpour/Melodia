@@ -9,14 +9,14 @@ namespace Proj.Application.Artists.Create;
 
 internal class CreateArtistCommandHandler : IBaseCommandHandler<CreateArtistCommand>
 {
-    private readonly IArtistRepository _artistRepository;
-    private readonly IArtistDomainService _artistDomainService;
+    private readonly IArtistRepository _repository;
+    private readonly IArtistDomainService _domainService;
     private readonly IFileService _fileService;
 
-    public CreateArtistCommandHandler(IArtistRepository artistRepository, IArtistDomainService artistDomainService, IFileService fileService)
+    public CreateArtistCommandHandler(IArtistRepository repository, IArtistDomainService domainService, IFileService fileService)
     {
-        _artistRepository = artistRepository;
-        _artistDomainService = artistDomainService;
+        _repository = repository;
+        _domainService = domainService;
         _fileService = fileService;
     }
 
@@ -24,11 +24,11 @@ internal class CreateArtistCommandHandler : IBaseCommandHandler<CreateArtistComm
     {
         var artistImage = await _fileService.SaveFileAndGenerateName(request.ArtistImg, Directories.ArtistImages);
 
-        var artist = new Artist(request.ArtistName, artistImage, request.AboutArtist, request.CategoryId, request.Slug,
-            request.SeoData, _artistDomainService);
-        
-        await _artistRepository.AddAsync(artist);
-        await _artistRepository.Save();
+        var artist = new Artist(request.ArtistName, artistImage, request.CategoryId, request.AboutArtist, request.Slug,
+            request.SeoData, _domainService);
+
+        await _repository.AddAsync(artist);
+        await _repository.Save();
         return OperationResult.Success("آرتیست با موفقیت ثبت شد");
     }
 }

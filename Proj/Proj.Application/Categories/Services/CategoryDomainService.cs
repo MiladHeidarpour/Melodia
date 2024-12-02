@@ -5,15 +5,15 @@ namespace Proj.Application.Categories.Services;
 
 public class CategoryDomainService : ICategoryDomainService
 {
-    private readonly ICategoryRepository _categoryRepository;
+    private readonly ICategoryRepository _repository;
 
-    public CategoryDomainService(ICategoryRepository categoryRepository)
+    public CategoryDomainService(ICategoryRepository repository)
     {
-        _categoryRepository = categoryRepository;
+        _repository = repository;
     }
 
     public bool IsSlugExist(string slug)
     {
-        return _categoryRepository.Exists(s => s.Slug == slug);
+        return _repository.Exists(s => s.Slug == slug);
     }
 }

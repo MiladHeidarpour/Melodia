@@ -10,11 +10,11 @@ public class CreateMusicAlbumCommandValidator : AbstractValidator<CreateMusicAlb
     {
         RuleFor(r => r.AlbumName).NotEmpty().WithMessage(ValidationMessages.required("نام آلبوم"));
 
+        RuleFor(r => r.CategoryId).NotEmpty().WithMessage(ValidationMessages.required("دسته بندی"));
+
         RuleFor(r => r.CoverImg).JustImageFile();
 
-        RuleFor(r => r.AlbumTime).NotEmpty().WithMessage(ValidationMessages.required("مدت زمان آلبوم"));
-
-        RuleFor(r => r.NumberOfSongs).NotEmpty().WithMessage(ValidationMessages.required("تعداد موزیک"));
+        RuleFor(r => r.AlbumType).NotEmpty().WithMessage(ValidationMessages.required("نوع آلبوم"));
 
         RuleFor(r => r.Slug)
             .NotEmpty().WithMessage(ValidationMessages.required("اسلاگ"));

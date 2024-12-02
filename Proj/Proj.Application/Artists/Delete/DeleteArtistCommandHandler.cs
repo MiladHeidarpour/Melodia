@@ -1,35 +1,34 @@
 ﻿using Common.Application;
 using Common.Application.FileUtil.Interfaces;
+using Proj.Application._Utilities;
 using Proj.Domain.ArtistAgg.Repositories;
-using Proj.Domain.ArtistAgg.Services;
 
 namespace Proj.Application.Artists.Delete;
 
 internal class DeleteArtistCommandHandler : IBaseCommandHandler<DeleteArtistCommand>
 {
-    private readonly IArtistRepository _artistRepository;
-    private readonly IArtistDomainService _artistDomainService;
+    private readonly IArtistRepository _repository;
     private readonly IFileService _fileService;
 
-    public DeleteArtistCommandHandler(IArtistRepository artistRepository, IArtistDomainService artistDomainService, IFileService fileService)
+    public DeleteArtistCommandHandler(IArtistRepository repository, IFileService fileService)
     {
-        _artistRepository = artistRepository;
-        _artistDomainService = artistDomainService;
+        _repository = repository;
         _fileService = fileService;
     }
 
     public async Task<OperationResult> Handle(DeleteArtistCommand request, CancellationToken cancellationToken)
     {
-        var artist = await _artistRepository.GetTracking(request.ArtistId);
+        var artist = await _repository.GetTracking(request.ArtistId);
 
         if (artist == null)
             return OperationResult.NotFound("آرتیست مورد نظر یافت نشد");
 
-        var result = await _artistRepository.DeleteArtist(request.ArtistId);
+        var result = await _repository.DeleteArtist(request.ArtistId);
 
-        if (result == true)
+        if (result)
         {
-            await _artistRepository.Save();
+            await _repository.Save();
+            _fileService.DeleteFile(Directories.ArtistImages, artist.ArtistImg);
             return OperationResult.Success("حذف آرتیست با موفقیت انجام شد");
         }
 

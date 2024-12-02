@@ -13,13 +13,16 @@ public class MusicConfiguration : IEntityTypeConfiguration<Music>
         builder.HasIndex(c => c.Slug).IsUnique();
 
         builder.Property(c => c.TrackName).IsRequired().HasMaxLength(250);
-        builder.Property(c => c.CoverImg).IsRequired();
         builder.Property(c => c.TrackFile).IsRequired();
         builder.Property(c => c.TrackTime).IsRequired();
-        builder.Property(c => c.RelaseDate).IsRequired();
+        builder.Property(c => c.ReleaseDate).IsRequired();
         builder.Property(c => c.Slug).IsRequired().IsUnicode(false);
 
-        //builder.HasMany(b => b.Artists);
+        builder.OwnsMany(b => b.ArtistMusics, option =>
+        {
+            option.ToTable("ArtistMusics", "Musics");
+            option.Property(f => f.ArtistType).IsRequired();
+        });
 
         builder.OwnsOne(b => b.SeoData, config =>
         {

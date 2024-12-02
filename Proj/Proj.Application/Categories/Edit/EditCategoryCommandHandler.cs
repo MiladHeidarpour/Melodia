@@ -9,25 +9,24 @@ namespace Proj.Application.Categories.Edit;
 
 internal class EditCategoryCommandHandler : IBaseCommandHandler<EditCategoryCommand>
 {
-    private readonly ICategoryRepository _categoryRepository;
-    private readonly ICategoryDomainService _categoryDomainService;
+    private readonly ICategoryRepository _repository;
+    private readonly ICategoryDomainService _domainService;
     private readonly IFileService _fileService;
-
-    public EditCategoryCommandHandler(ICategoryRepository categoryRepository, ICategoryDomainService categoryDomainService, IFileService fileService)
+    public EditCategoryCommandHandler(ICategoryRepository repository, ICategoryDomainService domainService, IFileService fileService)
     {
-        _categoryRepository = categoryRepository;
-        _categoryDomainService = categoryDomainService;
+        _repository = repository;
+        _domainService = domainService;
         _fileService = fileService;
     }
 
     public async Task<OperationResult> Handle(EditCategoryCommand request, CancellationToken cancellationToken)
     {
-        var category = await _categoryRepository.GetTracking(request.CategoryId);
+        var category = await _repository.GetTracking(request.CategoryId);
 
         if (category == null)
             return OperationResult.NotFound("دسته بندی مورد نظر یافت نشد");
 
-        category.Edit(request.Title, request.Slug, request.SeoData, _categoryDomainService);
+        category.Edit(request.Title, request.Slug, request.SeoData, _domainService);
 
         var oldImage = category.ImageName;
         if (request.ImageName != null)
@@ -36,8 +35,8 @@ internal class EditCategoryCommandHandler : IBaseCommandHandler<EditCategoryComm
             category.SetCategoryImg(imageName);
         }
 
-        await _categoryRepository.Save();
-        RemoveOldImage(request.ImageName,oldImage);
+        await _repository.Save();
+        RemoveOldImage(request.ImageName, oldImage);
         return OperationResult.Success("دسته بندی با موفقیت ثبت شد");
     }
 

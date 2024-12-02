@@ -2,8 +2,6 @@
 using Common.Application.FileUtil.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Proj.Application._Utilities;
-using Proj.Domain.MusicAgg;
-using Proj.Domain.MusicAgg.Services;
 using Proj.Domain.MusicAlbumAgg.Repositories;
 using Proj.Domain.MusicAlbumAgg.Services;
 
@@ -11,28 +9,26 @@ namespace Proj.Application.MusicAlbums.Edit;
 
 internal class EditMusicAlbumCommandHandler : IBaseCommandHandler<EditMusicAlbumCommand>
 {
-    private readonly IMusicAlbumRepository _musicAlbumRepository;
-    private readonly IMusicAlbumDomainService _musicAlbumDomainService;
-    private readonly IMusicDomainService _musicDomainService;
+    private readonly IMusicAlbumRepository _repository;
+    private readonly IMusicAlbumDomainService _domainService;
     private readonly IFileService _fileService;
 
-    public EditMusicAlbumCommandHandler(IMusicAlbumRepository musicAlbumRepository, IMusicAlbumDomainService musicAlbumDomainService, IFileService fileService, IMusicDomainService musicDomainService)
+    public EditMusicAlbumCommandHandler(IFileService fileService, IMusicAlbumRepository repository, IMusicAlbumDomainService domainService)
     {
-        _musicAlbumRepository = musicAlbumRepository;
-        _musicAlbumDomainService = musicAlbumDomainService;
+        _repository = repository;
+        _domainService = domainService;
         _fileService = fileService;
-        _musicDomainService = musicDomainService;
     }
 
 
     public async Task<OperationResult> Handle(EditMusicAlbumCommand request, CancellationToken cancellationToken)
     {
-        var musicAlbum = await _musicAlbumRepository.GetTracking(request.AlbumId);
+        var musicAlbum = await _repository.GetTracking(request.AlbumId);
 
         if (musicAlbum == null)
             return OperationResult.NotFound("آلبوم مورد نظر یافت نشد");
 
-        musicAlbum.Edit(request.AlbumName,request.AlbumTime,request.NumberOfSongs,request.Slug,request.SeoData,_musicAlbumDomainService);
+        musicAlbum.Edit(request.AlbumName, request.CategoryId, request.AlbumType, request.Slug, request.SeoData, _domainService);
 
         var oldCoverImg = musicAlbum.CoverImg;
         if (request.CoverImg != null)
@@ -41,25 +37,7 @@ internal class EditMusicAlbumCommandHandler : IBaseCommandHandler<EditMusicAlbum
             musicAlbum.SetMusicAlbumCoverImg(coverImg);
         }
 
-        var musics = new List<Music>();
-        request.Musics.ForEach(f =>
-        {
-            musics.Add(new Music(
-                f.TrackName,
-                f.CoverImg,
-                f.CategoryId,
-                f.TrackFile,
-                f.TrackTime,
-                f.RelaseDate,
-                f.Lyric,
-                f.IsAlbum,
-                f.Slug,
-                f.SeoData,
-                _musicDomainService));
-        });
-        //musicAlbum.SetAlbumMusics(musics);
-
-        await _musicAlbumRepository.Save();
+        await _repository.Save();
         RemoveOldImage(request.CoverImg, oldCoverImg);
         return OperationResult.Success("ویرایش آلبوم با موفقیت انجام شد");
     }

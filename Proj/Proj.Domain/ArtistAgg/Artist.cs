@@ -10,51 +10,46 @@ public class Artist : AggregateRoot
 {
     public string ArtistName { get; private set; }
     public string ArtistImg { get; private set; }
-    public string? AboutArtist { get; private set; }
     public long CategoryId { get; private set; }
+    public string? AboutArtist { get; private set; }
     public string Slug { get; private set; }
     public SeoData SeoData { get; private set; }
-
     private Artist()
     {
 
     }
-
-    public Artist(string artistName, string artistImg, string? aboutArtist, long categoryId, string slug,
-        SeoData seoData, IArtistDomainService artistService)
+    public Artist(string artistName, string artistImg, long categoryId, string? aboutArtist, string slug,
+        SeoData seoData, IArtistDomainService domainService)
     {
         NullOrEmptyDomainDataException.CheckString(artistImg, nameof(artistImg));
-        Gaurd(artistName, slug, artistService);
+        Guard(artistName, slug, domainService);
         ArtistName = artistName;
         ArtistImg = artistImg;
-        AboutArtist = aboutArtist;
         CategoryId = categoryId;
-        Slug = slug.ToSlug();
+        AboutArtist = aboutArtist;
+        Slug = slug?.ToSlug();
         SeoData = seoData;
     }
-
-    public void Edit(string artistName, string? aboutArtist, long categoryId, string slug,
-        SeoData seoData, IArtistDomainService artistService)
+    public void Edit(string artistName, string? aboutArtist, string slug, long categoryId,
+        SeoData seoData, IArtistDomainService domainService)
     {
-        Gaurd(artistName, slug, artistService);
+        Guard(artistName, slug, domainService);
         ArtistName = artistName;
-        AboutArtist = aboutArtist;
         CategoryId = categoryId;
-        Slug = slug.ToSlug();
+        AboutArtist = aboutArtist;
+        Slug = slug?.ToSlug();
         SeoData = seoData;
     }
-
     public void SetArtistImg(string artistImg)
     {
         NullOrEmptyDomainDataException.CheckString(artistImg, nameof(artistImg));
         ArtistImg = ArtistImg;
     }
-
-    public void Gaurd(string artistName, string slug, IArtistDomainService artistService)
+    private void Guard(string artistName, string slug, IArtistDomainService domainService)
     {
         if (slug != Slug)
         {
-            if (artistService.IsSlugExsit(slug.ToSlug()) == true)
+            if (domainService.IsSlugExist(slug.ToSlug()))
             {
                 throw new SlugIsDuplicateException();
             }

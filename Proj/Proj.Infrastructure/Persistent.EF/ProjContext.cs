@@ -8,8 +8,8 @@ namespace Proj.Infrastructure.Persistent.EF;
 
 public class ProjContext : DbContext
 {
-    public DbSet<Category> Categories { get; set; }
     public DbSet<Artist> Artists { get; set; }
+    public DbSet<Category> Categories { get; set; }
     public DbSet<Music> Musics { get; set; }
     public DbSet<MusicAlbum> MusicAlbums { get; set; }
 

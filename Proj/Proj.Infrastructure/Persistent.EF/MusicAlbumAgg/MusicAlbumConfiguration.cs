@@ -14,10 +14,9 @@ public class MusicAlbumConfiguration:IEntityTypeConfiguration<MusicAlbum>
 
         builder.Property(c => c.AlbumName).HasMaxLength(100).IsRequired();
         builder.Property(c => c.CoverImg).IsRequired();
-        builder.Property(c => c.AlbumTime).IsRequired();
+        builder.Property(c => c.CategoryId).IsRequired();
+        builder.Property(c => c.AlbumType).IsRequired();
         builder.Property(c => c.Slug).IsRequired().IsUnicode(false);
-
-        //builder.HasMany(b => b.Musics);
 
         builder.OwnsOne(b => b.SeoData, config =>
         {

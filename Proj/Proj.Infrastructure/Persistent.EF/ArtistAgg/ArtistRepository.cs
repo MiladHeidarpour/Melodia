@@ -18,12 +18,12 @@ internal class ArtistRepository : BaseRepository<Artist>, IArtistRepository
         if (artist == null)
             return false;
 
-        //var isExistMusic = await _context.Musics.AnyAsync(f => f.Artists.Exists(f => f.Id == artistId));
+        var isExistMusic = await _context.Musics.AnyAsync(f => f.ArtistMusics.Exists(f => f.Id == artistId));
 
-        //if (isExistMusic)
-        //    return false;
+        if (isExistMusic)
+            return false;
 
-        _context.Remove(artist);
+        _context.Artists.Remove(artist);
         return true;
     }
 }

@@ -5,7 +5,7 @@ using Proj.Infrastructure._Utilities;
 
 namespace Proj.Infrastructure.Persistent.EF.MusicAgg;
 
-internal class MusicRepository:BaseRepository<Music>,IMusicRepository
+internal class MusicRepository : BaseRepository<Music>, IMusicRepository
 {
     public MusicRepository(ProjContext context) : base(context)
     {
@@ -18,12 +18,7 @@ internal class MusicRepository:BaseRepository<Music>,IMusicRepository
         if (music == null)
             return false;
 
-        //var isExistMusic = await _context.Musics.AnyAsync(f => f.Artists.Exists(f => f.Id == artistId));
-
-        //if (isExistMusic)
-        //    return false;
-
-        _context.Remove(music);
+        _context.Musics.Remove(music);
         return true;
     }
 }

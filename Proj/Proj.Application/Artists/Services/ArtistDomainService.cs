@@ -5,15 +5,15 @@ namespace Proj.Application.Artists.Services;
 
 public class ArtistDomainService : IArtistDomainService
 {
-    private readonly IArtistRepository _artistRepository;
+    private readonly IArtistRepository _repository;
 
-    public ArtistDomainService(IArtistRepository artistRepository)
+    public ArtistDomainService(IArtistRepository repository)
     {
-        _artistRepository = artistRepository;
+        _repository = repository;
     }
 
-    public bool IsSlugExsit(string slug)
+    public bool IsSlugExist(string slug)
     {
-        return _artistRepository.Exists(a => a.Slug == slug);
+        return _repository.Exists(a => a.Slug == slug);
     }
 }

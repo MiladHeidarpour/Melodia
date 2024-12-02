@@ -17,38 +17,34 @@ public class Category : AggregateRoot
     {
 
     }
-
-    public Category(string title, string slug, string imageName, SeoData seoData, ICategoryDomainService categoryService)
+    public Category(string title, string imageName, string slug, SeoData seoData, ICategoryDomainService domainService)
     {
         NullOrEmptyDomainDataException.CheckString(imageName, nameof(imageName));
-        Gaurd(title, slug, categoryService);
+        Guard(title, slug, domainService);
         Title = title;
         ImageName = imageName;
         Slug = slug?.ToSlug();
         SeoData = seoData;
     }
-
-    public void Edit(string title, string slug, SeoData seoData, ICategoryDomainService categoryService)
+    public void Edit(string title, string slug, SeoData seoData, ICategoryDomainService domainService)
     {
-        Gaurd(title, slug, categoryService);
+        Guard(title, slug, domainService);
         Title = title;
         Slug = slug?.ToSlug();
         SeoData = seoData;
     }
-
     public void SetCategoryImg(string imageName)
     {
         NullOrEmptyDomainDataException.CheckString(imageName, nameof(imageName));
         ImageName = imageName;
     }
-
-    public void Gaurd(string title, string slug, ICategoryDomainService categoryService)
+    private void Guard(string title, string slug, ICategoryDomainService domainService)
     {
         NullOrEmptyDomainDataException.CheckString(title, nameof(title));
         NullOrEmptyDomainDataException.CheckString(slug, nameof(slug));
         if (slug != Slug)
         {
-            if (categoryService.IsSlugExist(slug) == true)
+            if (domainService.IsSlugExist(slug))
             {
                 throw new SlugIsDuplicateException();
             }

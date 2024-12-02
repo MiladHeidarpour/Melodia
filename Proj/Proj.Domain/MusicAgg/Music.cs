@@ -2,86 +2,122 @@
 using Common.Domain.Exceptions;
 using Common.Domain.Utilities;
 using Common.Domain.ValueObjects;
-using Proj.Domain.ArtistAgg;
-using Proj.Domain.CategoryAgg.Services;
 using Proj.Domain.MusicAgg.Services;
+using Proj.Domain.MusicAlbumAgg.Services;
 
 namespace Proj.Domain.MusicAgg;
-
-public class Music : AggregateRoot
+public class Music : BaseEntity
 {
     public string TrackName { get; private set; }
-    public string CoverImg { get; private set; }
-    public long CategoryId { get; private set; }
+    public long AlbumId { get; internal set; }
     public string TrackFile { get; private set; }
     public TimeSpan TrackTime { get; private set; }
-    public DateTime RelaseDate { get; private set; }
+    public DateTime ReleaseDate { get; private set; }
     public string? Lyric { get; private set; }
-    public bool IsAlbum { get; private set; }
     public string Slug { get; private set; }
     public SeoData SeoData { get; private set; }
-    //public List<Artist> Artists { get; private set; }
+    public List<ArtistMusic> ArtistMusics { get; private set; }
 
     private Music()
     {
     }
-    public Music(string trackName, string coverImg, long categoryId, string trackFile,
-        TimeSpan trackTime, DateTime relaseDate, string? lyric, bool isAlbum,
-        string slug, SeoData seoData, IMusicDomainService musicService)
+
+    public Music(string trackName, long albumId, string trackFile, TimeSpan trackTime, DateTime releaseDate,
+        string? lyric, string slug, SeoData seoData, IMusicDomainService domainService)
     {
-        NullOrEmptyDomainDataException.CheckString(coverImg, nameof(coverImg));
         NullOrEmptyDomainDataException.CheckString(trackFile, nameof(trackFile));
-        Gaurd(trackName, slug, musicService);
+        Guard(trackName, slug, domainService);
         TrackName = trackName;
-        CoverImg = coverImg;
-        CategoryId = categoryId;
+        AlbumId = albumId;
         TrackFile = trackFile;
         TrackTime = trackTime;
-        RelaseDate = relaseDate;
+        ReleaseDate = releaseDate;
         Lyric = lyric;
-        IsAlbum = isAlbum;
         Slug = slug?.ToSlug();
         SeoData = seoData;
+        ArtistMusics = new();
     }
 
-    public void Edit(string trackName, long categoryId,
-        TimeSpan trackTime, DateTime relaseDate, string? lyric, bool isAlbum,
-        string slug, SeoData seoData, IMusicDomainService musicService)
+    public void Edit(string trackName, long albumId, TimeSpan trackTime, DateTime releaseDate, string? lyric,
+        string slug, SeoData seoData, IMusicDomainService domainService)
     {
-        Gaurd(trackName, slug, musicService);
+        Guard(trackName, slug, domainService);
         TrackName = trackName;
-        CategoryId = categoryId;
+        AlbumId = albumId;
         TrackTime = trackTime;
-        RelaseDate = relaseDate;
+        ReleaseDate = releaseDate;
         Lyric = lyric;
-        IsAlbum = isAlbum;
         Slug = slug?.ToSlug();
         SeoData = seoData;
     }
-
-    //public void SetMusicArtist(List<Artist> artists)
-    //{
-    //    Artists = artists;
-    //}
-    public void SetMusicCoverImg(string coverImg)
-    {
-        NullOrEmptyDomainDataException.CheckString(coverImg, nameof(coverImg));
-        CoverImg = coverImg;
-    }
-
     public void SetMusicTrackFile(string trackFile)
     {
         NullOrEmptyDomainDataException.CheckString(trackFile, nameof(trackFile));
         TrackFile = trackFile;
     }
+    public void SetArtistMusics(List<ArtistMusic> artistMusics)
+    {
+        ArtistMusics = artistMusics;
+    }
+    public void SetArtistMusic(ArtistMusic artistMusic)
+    {
+        artistMusic.MusicId = Id;
+        ArtistMusics.Add(artistMusic);
+    }
 
-    public void Gaurd(string trackName, string slug, IMusicDomainService musicService)
+    //Music 
+    //public void AddMusic(Music music)
+    //{
+    //    music.AlbumId = Id;
+    //    Musics.Add(music);
+    //}
+    //public void AddListMusic(List<Music> musics)
+    //{
+    //    musics.ForEach(f => f.AlbumId = Id);
+    //    Musics = musics;
+    //}
+    //public void EditMusic(Music music, long musicId, IMusicAlbumDomainService domainService)
+    //{
+    //    var oldMusic = Musics.FirstOrDefault(f => f.Id == musicId);
+    //    if (oldMusic == null)
+    //    {
+    //        throw new NullOrEmptyDomainDataException("موزیک مورد نظر یافت نشد");
+    //    }
+    //    oldMusic.Edit(music.TrackName, music.AlbumId, music.TrackTime, music.ReleaseDate, music.Lyric, music.Slug, music.SeoData, domainService);
+    //}
+    //public string RemoveMusic(long musicId)
+    //{
+    //    var music = Musics.FirstOrDefault(f => f.Id == musicId);
+    //    if (music != null)
+    //    {
+    //        throw new NullOrEmptyDomainDataException("موزیک مورد نظر یافت نشد");
+    //    }
+
+    //    Musics.Remove(music);
+    //    return music.TrackFile;
+    //}
+
+    //ArtistMusics
+    //public void SetArtistMusic(List<ArtistMusic> artistMusics, long musicId)
+    //{
+    //    var music = Musics.FirstOrDefault(f => f.Id == musicId);
+    //    artistMusics.ForEach(f => f.MusicId = Id);
+    //    music.SetArtistMusics(artistMusics);
+    //}
+
+    //public void AddArtistMusic(ArtistMusic artistMusic, long musicId)
+    //{
+    //    var music = Musics.FirstOrDefault(f => f.Id == musicId);
+    //    artistMusic.MusicId = musicId;
+    //    music.SetArtistMusic(artistMusic);
+    //}
+    private void Guard(string trackName, string slug, IMusicDomainService domainService)
     {
         NullOrEmptyDomainDataException.CheckString(trackName, nameof(trackName));
         NullOrEmptyDomainDataException.CheckString(slug, nameof(slug));
         if (slug != Slug)
         {
-            if (musicService.IsSlugExist(slug) == true)
+            if (domainService.IsSlugExist(slug))
             {
                 throw new SlugIsDuplicateException();
             }
