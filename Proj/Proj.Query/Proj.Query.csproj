@@ -9,8 +9,12 @@
   <ItemGroup>
     <Folder Include="Artists\Mapper\" />
     <Folder Include="Artists\GetByFilter\" />
+    <Folder Include="Artists\GetBySlug\" />
     <Folder Include="Categories\Mapper\" />
+    <Folder Include="Categories\GetBySlug\" />
     <Folder Include="Musics\Mapper\" />
+    <Folder Include="Musics\GetById\" />
+    <Folder Include="Musics\GetBySlug\" />
   </ItemGroup>
 
   <ItemGroup>

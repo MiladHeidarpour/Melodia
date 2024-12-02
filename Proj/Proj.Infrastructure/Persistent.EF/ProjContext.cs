@@ -8,6 +8,10 @@ namespace Proj.Infrastructure.Persistent.EF;
 
 public class ProjContext : DbContext
 {
+    public ProjContext(DbContextOptions<ProjContext> options) : base(options)
+    {
+
+    }
     public DbSet<Artist> Artists { get; set; }
     public DbSet<Category> Categories { get; set; }
     public DbSet<Music> Musics { get; set; }

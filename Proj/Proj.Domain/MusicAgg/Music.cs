@@ -3,10 +3,9 @@ using Common.Domain.Exceptions;
 using Common.Domain.Utilities;
 using Common.Domain.ValueObjects;
 using Proj.Domain.MusicAgg.Services;
-using Proj.Domain.MusicAlbumAgg.Services;
 
 namespace Proj.Domain.MusicAgg;
-public class Music : BaseEntity
+public class Music : AggregateRoot
 {
     public string TrackName { get; private set; }
     public long AlbumId { get; internal set; }

@@ -22,14 +22,14 @@ public static class InfrastructureBootstrapper
         services.AddTransient<IMusicAlbumRepository, MusicAlbumRepository>();
         services.AddTransient<IMusicRepository, MusicRepository>();
 
-        services.AddDbContext<ProjContext>(option =>
-        {
-            option.UseSqlServer(connectionString);
-        });
-
         services.AddTransient<DapperContext>(_ =>
         {
             return new DapperContext(connectionString);
+        });
+
+        services.AddDbContext<ProjContext>(option =>
+        {
+            option.UseSqlServer(connectionString);
         });
     }
 }
