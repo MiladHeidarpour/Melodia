@@ -11,4 +11,8 @@
     <ProjectReference Include="..\Proj.Query\Proj.Query.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Categories\" />
+  </ItemGroup>
+
 </Project>

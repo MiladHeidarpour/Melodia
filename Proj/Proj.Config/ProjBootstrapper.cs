@@ -11,6 +11,7 @@ using Proj.Domain.CategoryAgg.Services;
 using Proj.Domain.MusicAgg.Services;
 using Proj.Domain.MusicAlbumAgg.Services;
 using Proj.Infrastructure;
+using Proj.Presentation.Facade;
 using Proj.Query.Artists.GetById;
 
 namespace Proj.Config;
@@ -30,5 +31,6 @@ public static class ProjBootstrapper
         services.AddTransient<IMusicDomainService, MusicDomainService>();
 
         services.AddValidatorsFromAssembly(typeof(CreateArtistCommandValidator).Assembly);
+        services.InitFacadeDependency();
     }
 }
