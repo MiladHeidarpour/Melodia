@@ -22,7 +22,7 @@ internal class CreateCategoryCommandHandler : IBaseCommandHandler<CreateCategory
     public async Task<OperationResult> Handle(CreateCategoryCommand request, CancellationToken cancellationToken)
     {
         var imageName = await _fileService.SaveFileAndGenerateName(request.ImageName, Directories.CategoryImages);
-        var category = new Category(request.Title, request.Slug, imageName, request.SeoData, _domainService);
+        var category = new Category(request.Title, imageName, request.Slug, request.SeoData, _domainService);
         await _repository.AddAsync(category);
         await _repository.Save();
         return OperationResult.Success("دسته بندی با موفقیت ثبت شد");

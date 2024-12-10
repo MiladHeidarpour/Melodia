@@ -4,4 +4,12 @@ using Microsoft.AspNetCore.Http;
 
 namespace Proj.Application.Artists.Create;
 
-public record CreateArtistCommand(string ArtistName, IFormFile ArtistImg, long CategoryId, string? AboutArtist, string Slug, SeoData SeoData) : IBaseCommand;
+public class CreateArtistCommand : IBaseCommand
+{
+    public string ArtistName { get; set; }
+    public IFormFile ArtistImg { get; set; }
+    public long CategoryId { get; set; }
+    public string? AboutArtist { get; set; }
+    public string Slug { get; set; }
+    public SeoData SeoData { get; set; }
+}

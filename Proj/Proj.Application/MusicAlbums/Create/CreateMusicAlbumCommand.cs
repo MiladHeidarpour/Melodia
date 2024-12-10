@@ -13,14 +13,4 @@ public class CreateMusicAlbumCommand : IBaseCommand
     public AlbumType AlbumType { get; set; }
     public string Slug { get; set; }
     public SeoData SeoData { get; set; }
-
-    public CreateMusicAlbumCommand(string albumName, IFormFile coverImg, long categoryId, AlbumType albumType, string slug, SeoData seoData)
-    {
-        AlbumName = albumName;
-        CoverImg = coverImg;
-        CategoryId = categoryId;
-        AlbumType = albumType;
-        Slug = slug;
-        SeoData = seoData;
-    }
 }

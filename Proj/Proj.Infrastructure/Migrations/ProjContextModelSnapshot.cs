@@ -128,8 +128,9 @@ namespace Proj.Infrastructure.Migrations
                         .HasMaxLength(250)
                         .HasColumnType("nvarchar(250)");
 
-                    b.Property<TimeSpan>("TrackTime")
-                        .HasColumnType("time");
+                    b.Property<string>("TrackTime")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 

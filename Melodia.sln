@@ -29,6 +29,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Proj.Api", "Src\Proj.Api\Pr
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Proj.Config", "Proj\Proj.Config\Proj.Config.csproj", "{95078235-5B97-4B45-AFC1-0C0A6D7F615B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common.AspNetCore", "Common\Common.AspNetCore\Common.AspNetCore.csproj", "{FA59D57A-8E04-43E0-977F-8F52764695A2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -75,6 +77,10 @@ Global
 		{95078235-5B97-4B45-AFC1-0C0A6D7F615B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{95078235-5B97-4B45-AFC1-0C0A6D7F615B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{95078235-5B97-4B45-AFC1-0C0A6D7F615B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FA59D57A-8E04-43E0-977F-8F52764695A2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FA59D57A-8E04-43E0-977F-8F52764695A2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FA59D57A-8E04-43E0-977F-8F52764695A2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FA59D57A-8E04-43E0-977F-8F52764695A2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -91,5 +97,6 @@ Global
 		{EAC2142E-F0C9-4D9F-8527-E54A35A69960} = {BCB2545E-21DF-4CD5-9763-7FAC97835A66}
 		{C65E4B61-1661-453B-85A4-D3FD5FA2EC7C} = {EAC2142E-F0C9-4D9F-8527-E54A35A69960}
 		{95078235-5B97-4B45-AFC1-0C0A6D7F615B} = {BCB2545E-21DF-4CD5-9763-7FAC97835A66}
+		{FA59D57A-8E04-43E0-977F-8F52764695A2} = {03C555E3-7D05-4392-B87C-904F46C65AC0}
 	EndGlobalSection
 EndGlobal

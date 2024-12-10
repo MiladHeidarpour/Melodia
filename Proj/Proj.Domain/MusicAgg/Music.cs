@@ -10,7 +10,7 @@ public class Music : AggregateRoot
     public string TrackName { get; private set; }
     public long AlbumId { get; internal set; }
     public string TrackFile { get; private set; }
-    public TimeSpan TrackTime { get; private set; }
+    public string TrackTime { get; private set; }
     public DateTime ReleaseDate { get; private set; }
     public string? Lyric { get; private set; }
     public string Slug { get; private set; }
@@ -21,7 +21,7 @@ public class Music : AggregateRoot
     {
     }
 
-    public Music(string trackName, long albumId, string trackFile, TimeSpan trackTime, DateTime releaseDate,
+    public Music(string trackName, long albumId, string trackFile, string trackTime, DateTime releaseDate,
         string? lyric, string slug, SeoData seoData, IMusicDomainService domainService)
     {
         NullOrEmptyDomainDataException.CheckString(trackFile, nameof(trackFile));
@@ -37,7 +37,7 @@ public class Music : AggregateRoot
         ArtistMusics = new();
     }
 
-    public void Edit(string trackName, long albumId, TimeSpan trackTime, DateTime releaseDate, string? lyric,
+    public void Edit(string trackName, long albumId, string trackTime, DateTime releaseDate, string? lyric,
         string slug, SeoData seoData, IMusicDomainService domainService)
     {
         Guard(trackName, slug, domainService);

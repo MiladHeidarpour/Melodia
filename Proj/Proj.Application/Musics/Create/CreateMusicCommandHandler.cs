@@ -4,25 +4,28 @@ using Proj.Application._Utilities;
 using Proj.Domain.MusicAgg;
 using Proj.Domain.MusicAgg.Repositories;
 using Proj.Domain.MusicAgg.Services;
+using Proj.Domain.MusicAlbumAgg.Repositories;
 
 namespace Proj.Application.Musics.Create;
 
 internal class CreateMusicCommandHandler : IBaseCommandHandler<CreateMusicCommand>
 {
     private readonly IMusicRepository _repository;
+    private readonly IMusicAlbumRepository _albumRepository;
     private readonly IMusicDomainService _domainService;
     private readonly IFileService _fileService;
 
-    public CreateMusicCommandHandler(IMusicDomainService domainService, IFileService fileService, IMusicRepository repository)
+    public CreateMusicCommandHandler(IMusicDomainService domainService, IFileService fileService, IMusicRepository repository, IMusicAlbumRepository albumRepository)
     {
         _repository = repository;
+        _albumRepository = albumRepository;
         _domainService = domainService;
         _fileService = fileService;
     }
 
     public async Task<OperationResult> Handle(CreateMusicCommand request, CancellationToken cancellationToken)
     {
-        var album = await _repository.GetTracking(request.AlbumId);
+        var album = await _albumRepository.GetTracking(request.AlbumId);
         if (album == null)
         {
             return OperationResult.NotFound("آلبوم مورد نظر یافت نشد");

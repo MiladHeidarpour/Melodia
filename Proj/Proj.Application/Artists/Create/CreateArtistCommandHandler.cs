@@ -24,8 +24,7 @@ internal class CreateArtistCommandHandler : IBaseCommandHandler<CreateArtistComm
     {
         var artistImage = await _fileService.SaveFileAndGenerateName(request.ArtistImg, Directories.ArtistImages);
 
-        var artist = new Artist(request.ArtistName, artistImage, request.CategoryId, request.AboutArtist, request.Slug,
-            request.SeoData, _domainService);
+        var artist = new Artist(request.ArtistName, artistImage, request.CategoryId, request.AboutArtist, request.Slug, request.SeoData, _domainService);
 
         await _repository.AddAsync(artist);
         await _repository.Save();

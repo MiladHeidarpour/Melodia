@@ -14,13 +14,4 @@ public class EditMusicAlbumCommand : IBaseCommand
     public AlbumType AlbumType { get; set; }
     public string Slug { get; set; }
     public SeoData SeoData { get; set; }
-    public EditMusicAlbumCommand(long albumId, string albumName, IFormFile? coverImg, AlbumType albumType, int numberOfSongs, string slug, SeoData seoData)
-    {
-        AlbumId = albumId;
-        AlbumName = albumName;
-        CoverImg = coverImg;
-        AlbumType = albumType;
-        Slug = slug;
-        SeoData = seoData;
-    }
 }
