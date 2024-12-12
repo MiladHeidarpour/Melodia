@@ -21,4 +21,6 @@ public class DapperContext
     public string Categories => "[dbo].Categories";
     public string Musics => "[dbo].Musics";
     public string MusicAlbums => "[dbo].MusicAlbums";
+
+    public string ArtistMusics = "[Musics].ArtistMusics";
 }

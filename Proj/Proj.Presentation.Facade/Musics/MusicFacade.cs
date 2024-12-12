@@ -1,8 +1,15 @@
 ﻿using Common.Application;
 using MediatR;
+using Proj.Application.Musics.AddArtistMusic;
+using Proj.Application.Musics.AddListArtistMusics;
 using Proj.Application.Musics.Create;
 using Proj.Application.Musics.Delete;
+using Proj.Application.Musics.DeleteArtistMusic;
 using Proj.Application.Musics.Edit;
+using Proj.Application.Musics.EditArtistMusic;
+using Proj.Domain.MusicAgg;
+using Proj.Query.Musics.ArtistMusic.GetById;
+using Proj.Query.Musics.ArtistMusic.GetList;
 using Proj.Query.Musics.Dtos;
 using Proj.Query.Musics.GetByFilter;
 using Proj.Query.Musics.GetById;
@@ -30,6 +37,26 @@ internal class MusicFacade : IMusicFacade
         return await _mediator.Send(command);
     }
 
+    public async Task<OperationResult> AddArtistMusic(AddArtistMusicCommand command)
+    {
+        return await _mediator.Send(command);
+    }
+
+    public async Task<OperationResult> AddArtistMusicList(AddListArtistMusicsCommand command)
+    {
+        return await _mediator.Send(command);
+    }
+
+    public async Task<OperationResult> EditArtistMusic(EditArtistMusicCommand command)
+    {
+        return await _mediator.Send(command);
+    }
+
+    public async Task<OperationResult> DeleteArtistMusic(DeleteArtistMusicCommand command)
+    {
+        return await _mediator.Send(command);
+    }
+
     public async Task<OperationResult> EditMusic(EditMusicCommand command)
     {
         return await _mediator.Send(command);
@@ -48,6 +75,16 @@ internal class MusicFacade : IMusicFacade
     public async Task<List<MusicDto>> GetMusicList()
     {
         return await _mediator.Send(new GetMusicListQuery());
+    }
+
+    public async Task<ArtistMusicDto> GetArtistMusicById(long artistMusicId)
+    {
+        return await _mediator.Send(new GetArtistMusicByIdQuery(artistMusicId));
+    }
+
+    public async Task<List<ArtistMusicDto>> GetArtistMusicList(long musicId)
+    {
+        return await _mediator.Send(new GetArtistMusicListQuery(musicId));
     }
 
     public async Task<MusicFilterResult> GetMusicsByFilter(MusicFilterParams filterParams)

@@ -15,4 +15,11 @@ public class ArtistMusic : BaseEntity
         MusicId = musicId;
         ArtistType = artistType;
     }
+
+    public void Edit(long artistId, long musicId, ArtistType artistType)
+    {
+        ArtistId = artistId;
+        MusicId = musicId;
+        ArtistType = artistType;
+    }
 }

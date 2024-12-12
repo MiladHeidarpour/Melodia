@@ -37,6 +37,8 @@ internal class CreateMusicCommandHandler : IBaseCommandHandler<CreateMusicComman
             request.Lyric, request.Slug, request.SeoData, _domainService);
 
         await _repository.AddAsync(music);
+
+        music.SetArtistMusics(request.ArtistMusics);
         await _repository.Save();
         return OperationResult.Success("موزیک با موفقیت ثبت شد");
     }

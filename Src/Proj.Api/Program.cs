@@ -2,6 +2,7 @@ using Common.Application;
 using Common.Application.FileUtil.Interfaces;
 using Common.Application.FileUtil.Services;
 using Common.AspNetCore.MiddleWares;
+using Proj.Api.Infrastructure;
 using Proj.Config;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -15,6 +16,7 @@ builder.Services.AddSwaggerGen();
 
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.RegisterProjDependency(connectionString);
+builder.Services.RegisterApiDependency();
 CommonBootstrapper.Init(builder.Services);
 builder.Services.AddTransient<IFileService, FileService>();
 

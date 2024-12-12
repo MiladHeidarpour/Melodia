@@ -2,6 +2,7 @@
 using Common.Domain.Exceptions;
 using Common.Domain.Utilities;
 using Common.Domain.ValueObjects;
+using Proj.Domain.MusicAgg.Enums;
 using Proj.Domain.MusicAgg.Services;
 
 namespace Proj.Domain.MusicAgg;
@@ -62,6 +63,28 @@ public class Music : AggregateRoot
     {
         artistMusic.MusicId = Id;
         ArtistMusics.Add(artistMusic);
+    }
+
+    public void EditArtistMusic(long artistMusicId, long artistId, long musicId, ArtistType artistType)
+    {
+        var current = ArtistMusics.FirstOrDefault(f => f.Id == artistMusicId);
+        if (current == null)
+        {
+            return;
+        }
+
+        current.Edit(artistId, musicId, artistType);
+    }
+
+    public void DeleteArtistMusic(long artistMusicId)
+    {
+        var current = ArtistMusics.FirstOrDefault(f => f.Id == artistMusicId);
+        if (current == null)
+        {
+            return;
+        }
+
+        ArtistMusics.Remove(current);
     }
 
     //Music 
