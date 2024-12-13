@@ -1,11 +1,11 @@
 ﻿using Common.AspNetCore;
 using Microsoft.AspNetCore.Mvc;
+using Proj.Api.ViewModels.Admins.MusicAlbums;
 using Proj.Application.MusicAlbums.Create;
 using Proj.Application.MusicAlbums.Delete;
 using Proj.Application.MusicAlbums.Edit;
 using Proj.Presentation.Facade.MusicAlbums;
 using Proj.Query.MusicAlbums.Dtos;
-using Shop.Api.ViewModels.Products.MusicAlbums;
 
 namespace Proj.Api.Controllers.AdminControllers;
 

@@ -13,6 +13,8 @@
   <ItemGroup>
     <Folder Include="CategoryAgg\Repositories\" />
     <Folder Include="MusicAlbumAgg\Enums\" />
+    <Folder Include="RoleAgg\Repositories\" />
+    <Folder Include="UserAgg\Services\" />
   </ItemGroup>
 
 </Project>

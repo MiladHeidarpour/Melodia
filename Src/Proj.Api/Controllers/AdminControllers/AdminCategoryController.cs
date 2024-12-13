@@ -1,12 +1,12 @@
 ﻿using Common.AspNetCore;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Proj.Api.ViewModels.Admins.Categories;
 using Proj.Application.Categories.Create;
 using Proj.Application.Categories.Delete;
 using Proj.Application.Categories.Edit;
 using Proj.Presentation.Facade.Categories;
 using Proj.Query.Categories.Dtos;
-using Shop.Api.ViewModels.Products.Categories;
 
 namespace Proj.Api.Controllers.AdminControllers;
 

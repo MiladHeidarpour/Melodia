@@ -1,4 +1,4 @@
-﻿namespace Shop.Api.ViewModels.Products.Categories;
+﻿namespace Proj.Api.ViewModels.Admins.Categories;
 
 public class EditCategoryVM
 {

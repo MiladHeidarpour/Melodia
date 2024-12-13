@@ -1,6 +1,6 @@
 ﻿using Proj.Domain.MusicAlbumAgg.Enums;
 
-namespace Shop.Api.ViewModels.Products.MusicAlbums;
+namespace Proj.Api.ViewModels.Admins.MusicAlbums;
 
 public class CreateMusicAlbumVM
 {

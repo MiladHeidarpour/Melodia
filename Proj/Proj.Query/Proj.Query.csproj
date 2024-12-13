@@ -16,6 +16,13 @@
     <Folder Include="Musics\Mapper\" />
     <Folder Include="Musics\GetById\" />
     <Folder Include="Musics\GetBySlug\" />
+    <Folder Include="Roles\Dtos\" />
+    <Folder Include="Roles\GetById\" />
+    <Folder Include="Roles\GetList\" />
+    <Folder Include="Users\GetById\" />
+    <Folder Include="Users\GetByPhoneNumber\" />
+    <Folder Include="Users\UserTokens\GetByJwtToken\" />
+    <Folder Include="Users\UserTokens\GetByRefreshToken\" />
   </ItemGroup>
 
   <ItemGroup>

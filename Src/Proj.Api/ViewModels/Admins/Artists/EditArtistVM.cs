@@ -1,6 +1,4 @@
-﻿using Shop.Api.ViewModels.Products;
-
-namespace Proj.Api.ViewModels.Admins.Artists;
+﻿namespace Proj.Api.ViewModels.Admins.Artists;
 
 public class EditArtistVM
 {

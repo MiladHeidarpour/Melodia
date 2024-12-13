@@ -23,4 +23,5 @@ public class DapperContext
     public string MusicAlbums => "[dbo].MusicAlbums";
 
     public string ArtistMusics = "[Musics].ArtistMusics";
+    public string UserTokens => "[user].Tokens";
 }

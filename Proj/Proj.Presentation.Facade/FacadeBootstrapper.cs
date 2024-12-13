@@ -3,6 +3,8 @@ using Proj.Presentation.Facade.Artists;
 using Proj.Presentation.Facade.Categories;
 using Proj.Presentation.Facade.MusicAlbums;
 using Proj.Presentation.Facade.Musics;
+using Proj.Presentation.Facade.Roles;
+using Proj.Presentation.Facade.Users;
 
 namespace Proj.Presentation.Facade;
 
@@ -14,5 +16,7 @@ public static class FacadeBootstrapper
         services.AddScoped<ICategoryFacade, CategoryFacade>();
         services.AddScoped<IMusicAlbumFacade, MusicAlbumFacade>();
         services.AddScoped<IMusicFacade, MusicFacade>();
+        services.AddScoped<IUserFacade, UserFacade>();
+        services.AddScoped<IRoleFacade, RoleFacade>();
     }
 }

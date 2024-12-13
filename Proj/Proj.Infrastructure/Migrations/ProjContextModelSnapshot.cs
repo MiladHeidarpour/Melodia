@@ -179,6 +179,78 @@ namespace Proj.Infrastructure.Migrations
                     b.ToTable("MusicAlbums", "dbo");
                 });
 
+            modelBuilder.Entity("Proj.Domain.RoleAgg.Role", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"), 1L, 1);
+
+                    b.Property<DateTime>("CreationDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasMaxLength(60)
+                        .HasColumnType("nvarchar(60)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Roles", "dbo");
+                });
+
+            modelBuilder.Entity("Proj.Domain.UserAgg.User", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"), 1L, 1);
+
+                    b.Property<string>("Avatar")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreationDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Email")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<string>("FullName")
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Password")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("PhoneNumber")
+                        .IsRequired()
+                        .HasMaxLength(11)
+                        .HasColumnType("nvarchar(11)");
+
+                    b.Property<long>("RoleId")
+                        .HasColumnType("bigint");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Email")
+                        .IsUnique()
+                        .HasFilter("[Email] IS NOT NULL");
+
+                    b.HasIndex("PhoneNumber")
+                        .IsUnique();
+
+                    b.ToTable("Users", "dbo");
+                });
+
             modelBuilder.Entity("Proj.Domain.ArtistAgg.Artist", b =>
                 {
                     b.OwnsOne("Common.Domain.ValueObjects.SeoData", "SeoData", b1 =>
@@ -297,7 +369,7 @@ namespace Proj.Infrastructure.Migrations
 
                             b1.HasKey("MusicId", "Id");
 
-                            b1.ToTable("ArtistMusics", "Musics");
+                            b1.ToTable("ArtistMusics", "Music");
 
                             b1.WithOwner()
                                 .HasForeignKey("MusicId");
@@ -395,6 +467,86 @@ namespace Proj.Infrastructure.Migrations
 
                     b.Navigation("SeoData")
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("Proj.Domain.RoleAgg.Role", b =>
+                {
+                    b.OwnsMany("Proj.Domain.RoleAgg.RolePermission", "Permissions", b1 =>
+                        {
+                            b1.Property<long>("RoleId")
+                                .HasColumnType("bigint");
+
+                            b1.Property<long>("Id")
+                                .ValueGeneratedOnAdd()
+                                .HasColumnType("bigint");
+
+                            SqlServerPropertyBuilderExtensions.UseIdentityColumn(b1.Property<long>("Id"), 1L, 1);
+
+                            b1.Property<DateTime>("CreationDate")
+                                .HasColumnType("datetime2");
+
+                            b1.Property<int>("Permission")
+                                .HasColumnType("int");
+
+                            b1.HasKey("RoleId", "Id");
+
+                            b1.ToTable("Permissions", "Role");
+
+                            b1.WithOwner()
+                                .HasForeignKey("RoleId");
+                        });
+
+                    b.Navigation("Permissions");
+                });
+
+            modelBuilder.Entity("Proj.Domain.UserAgg.User", b =>
+                {
+                    b.OwnsMany("Shop.Domain.UserAgg.UserToken", "Tokens", b1 =>
+                        {
+                            b1.Property<long>("Id")
+                                .ValueGeneratedOnAdd()
+                                .HasColumnType("bigint");
+
+                            SqlServerPropertyBuilderExtensions.UseIdentityColumn(b1.Property<long>("Id"), 1L, 1);
+
+                            b1.Property<DateTime>("CreationDate")
+                                .HasColumnType("datetime2");
+
+                            b1.Property<string>("Device")
+                                .IsRequired()
+                                .HasMaxLength(100)
+                                .HasColumnType("nvarchar(100)");
+
+                            b1.Property<string>("HashJwtToken")
+                                .IsRequired()
+                                .HasMaxLength(250)
+                                .HasColumnType("nvarchar(250)");
+
+                            b1.Property<string>("HashRefreshToken")
+                                .IsRequired()
+                                .HasMaxLength(250)
+                                .HasColumnType("nvarchar(250)");
+
+                            b1.Property<DateTime>("RefreshTokenExpireDate")
+                                .HasColumnType("datetime2");
+
+                            b1.Property<DateTime>("TokenExpireDate")
+                                .HasColumnType("datetime2");
+
+                            b1.Property<long>("UserId")
+                                .HasColumnType("bigint");
+
+                            b1.HasKey("Id");
+
+                            b1.HasIndex("UserId");
+
+                            b1.ToTable("Tokens", "User");
+
+                            b1.WithOwner()
+                                .HasForeignKey("UserId");
+                        });
+
+                    b.Navigation("Tokens");
                 });
 #pragma warning restore 612, 618
         }

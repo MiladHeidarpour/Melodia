@@ -1,6 +1,6 @@
 ﻿using Common.Domain.ValueObjects;
 
-namespace Shop.Api.ViewModels.Products;
+namespace Proj.Api.ViewModels.Admins;
 
 public class SeoDataViewModel
 {

@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
+using Proj.Api.ViewModels.Admins.Musics;
+using Proj.Api.ViewModels.Admins.Musics.ArtistMusic;
 using Proj.Application.Musics.Create;
 using Proj.Domain.MusicAgg;
-using Shop.Api.ViewModels.Products.Musics;
-using Shop.Api.ViewModels.Products.Musics.ArtistMusic;
 
 namespace Proj.Api.Infrastructure;
 

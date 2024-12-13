@@ -12,6 +12,7 @@ public class MusicConfiguration : IEntityTypeConfiguration<Music>
         builder.HasKey(c => c.Id);
         builder.HasIndex(c => c.Slug).IsUnique();
 
+        builder.Property(c => c.AlbumId).IsRequired();
         builder.Property(c => c.TrackName).IsRequired().HasMaxLength(250);
         builder.Property(c => c.TrackFile).IsRequired();
         builder.Property(c => c.TrackTime).IsRequired();
@@ -20,7 +21,7 @@ public class MusicConfiguration : IEntityTypeConfiguration<Music>
 
         builder.OwnsMany(b => b.ArtistMusics, option =>
         {
-            option.ToTable("ArtistMusics", "Musics");
+            option.ToTable("ArtistMusics", "Music");
             option.Property(f => f.ArtistType).IsRequired();
         });
 

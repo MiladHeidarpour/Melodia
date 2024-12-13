@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Shop.Api.ViewModels.Products.Musics.ArtistMusic;
+using Proj.Api.ViewModels.Admins.Musics.ArtistMusic;
 
-namespace Shop.Api.ViewModels.Products.Musics;
+namespace Proj.Api.ViewModels.Admins.Musics;
 
 public class CreateMusicVM
 {
@@ -13,5 +13,5 @@ public class CreateMusicVM
     public string? Lyric { get; set; }
     public string Slug { get; set; }
     public SeoDataViewModel SeoData { get; set; }
-    public List<AddArtistMusicVM> ArtistMusics { get; set; }=new List<AddArtistMusicVM>();
+    public List<AddArtistMusicVM> ArtistMusics { get; set; } = new List<AddArtistMusicVM>();
 }

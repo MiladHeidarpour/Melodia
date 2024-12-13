@@ -1,6 +1,6 @@
 ﻿using Proj.Domain.MusicAgg.Enums;
 
-namespace Shop.Api.ViewModels.Products.Musics.ArtistMusic;
+namespace Proj.Api.ViewModels.Admins.Musics.ArtistMusic;
 
 public class EditArtistMusicVM
 {

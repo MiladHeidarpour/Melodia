@@ -5,6 +5,7 @@ namespace Common.Domain.Repositories;
 
 public interface IBaseRepository<T> where T : BaseEntity
 {
+    Task<T?> GetByFunc(Expression<Func<T,bool>> expression);
     Task<T?> GetAsync(long id);
     Task<T?> GetTracking(long id);
     Task AddAsync(T entity);

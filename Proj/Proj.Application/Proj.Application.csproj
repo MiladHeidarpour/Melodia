@@ -8,6 +8,9 @@
 
   <ItemGroup>
     <Folder Include="Categories\Services\" />
+    <Folder Include="Roles\Services\" />
+    <Folder Include="Users\RemoveToken\" />
+    <Folder Include="Users\Services\" />
   </ItemGroup>
 
   <ItemGroup>

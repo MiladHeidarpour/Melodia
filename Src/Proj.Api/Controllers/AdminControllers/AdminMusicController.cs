@@ -2,6 +2,9 @@
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using Proj.Api.Infrastructure;
+using Proj.Api.Infrastructure.Security;
+using Proj.Api.ViewModels.Admins.Musics;
+using Proj.Api.ViewModels.Admins.Musics.ArtistMusic;
 using Proj.Application.Musics.AddArtistMusic;
 using Proj.Application.Musics.Create;
 using Proj.Application.Musics.Delete;
@@ -10,12 +13,12 @@ using Proj.Application.Musics.Edit;
 using Proj.Application.Musics.EditArtistMusic;
 using Proj.Presentation.Facade.Musics;
 using Proj.Query.Musics.Dtos;
-using Shop.Api.ViewModels.Products.Musics;
-using Shop.Api.ViewModels.Products.Musics.ArtistMusic;
+using Shop.Domain.RoleAgg.Enums;
 
 
 namespace Proj.Api.Controllers.AdminControllers;
 
+[PermissionChecker(Permission.AdminPanel)]
 public class AdminMusicController : AdminApiController
 {
     private readonly IMusicFacade _facade;
@@ -34,7 +37,7 @@ public class AdminMusicController : AdminApiController
         return QueryResult(musics);
     }
 
-    [HttpGet("{musicId}")]
+    [HttpGet("{musicId:long}")]
     public async Task<ApiResult<MusicDto?>> GetMusicById(long musicId)
     {
         var music = await _facade.GetMusicById(musicId);

@@ -15,6 +15,11 @@ public class BaseRepository<TEntity>:IBaseRepository<TEntity> where TEntity : Ba
         _context = context;
     }
 
+    public async Task<TEntity?> GetByFunc(Expression<Func<TEntity, bool>> expression)
+    {
+        return await _context.Set<TEntity>().FirstOrDefaultAsync(expression);
+    }
+
     public async Task<TEntity?> GetAsync(long id)
     {
         return await _context.Set<TEntity>().AsTracking().FirstOrDefaultAsync(t => t.Id.Equals(id));

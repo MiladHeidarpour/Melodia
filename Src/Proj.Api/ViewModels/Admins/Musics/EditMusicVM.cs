@@ -1,4 +1,4 @@
-﻿namespace Shop.Api.ViewModels.Products.Musics;
+﻿namespace Proj.Api.ViewModels.Admins.Musics;
 
 public class EditMusicVM
 {

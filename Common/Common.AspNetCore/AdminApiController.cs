@@ -5,7 +5,6 @@ using Common.Application;
 
 namespace Common.AspNetCore;
 
-
 [Route("api/Admin/[controller]")]
 [ApiController]
 public class AdminApiController : ControllerBase
