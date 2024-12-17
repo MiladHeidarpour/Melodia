@@ -15,7 +15,6 @@ internal class CategoryConfiguration : IEntityTypeConfiguration<Category>
 
         builder.Property(c => c.Slug).IsRequired().IsUnicode(false);
         builder.Property(c => c.Title).IsRequired().HasMaxLength(100);
-        builder.Property(c => c.ImageName).IsRequired();
 
         builder.OwnsOne(b => b.SeoData, config =>
         {

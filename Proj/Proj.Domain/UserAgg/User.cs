@@ -2,7 +2,6 @@
 using Common.Domain.Exceptions;
 using Proj.Domain.UserAgg.Services;
 using Common.Domain;
-using Shop.Domain.UserAgg;
 
 namespace Proj.Domain.UserAgg;
 
@@ -22,7 +21,7 @@ public class User : AggregateRoot
     }
     public User(long roleId, string fullName, string email, string phoneNumber, string password,IUserDomainService domainService)
     {
-        Gaurd(phoneNumber,email,domainService);
+        Gaurd(phoneNumber, domainService);
         RoleId = roleId;
         FullName = fullName;
         Email = email;
@@ -35,7 +34,7 @@ public class User : AggregateRoot
 
     public void Edit(string fullName, string email, string phoneNumber, IUserDomainService domainService)
     {
-        Gaurd(phoneNumber, email, domainService);
+        Gaurd(phoneNumber, domainService);
         FullName = fullName;
         PhoneNumber = phoneNumber;
         Email = email;
@@ -84,7 +83,7 @@ public class User : AggregateRoot
         return token.HashJwtToken;
     }
     //Gaurd
-    public void Gaurd(string phoneNumber, string email, IUserDomainService domainService)
+    public void Gaurd(string phoneNumber, IUserDomainService domainService)
     {
         NullOrEmptyDomainDataException.CheckString(phoneNumber, nameof(phoneNumber));
         if (phoneNumber.Length != 11)//length<11 || length>11
@@ -92,14 +91,6 @@ public class User : AggregateRoot
             throw new InvalidDomainDataException("شماره موبایل نامعتبر است");
         }
 
-        if (!string.IsNullOrWhiteSpace(email))
-        {
-            if (email.IsValidEmail() == false)
-            {
-                throw new InvalidDomainDataException("ایمیل نامعتبر است");
-            }
-        }
-        
         if (phoneNumber != PhoneNumber)
         {
             if (domainService.IsPhoneNumberExist(phoneNumber) == true)
@@ -108,12 +99,19 @@ public class User : AggregateRoot
             }
         }
 
-        if (email != Email)
-        {
-            if (domainService.IsEmailExist(email) == true)
-            {
-                throw new InvalidDomainDataException("ایمیل تکراری است");
-            }
-        }
+        //if (!string.IsNullOrWhiteSpace(email))
+        //{
+        //    if (email.IsValidEmail() == false)
+        //    {
+        //        throw new InvalidDomainDataException("ایمیل نامعتبر است");
+        //    }
+        //}
+        //if (email != Email)
+        //{
+        //    if (domainService.IsEmailExist(email) == true)
+        //    {
+        //        throw new InvalidDomainDataException("ایمیل تکراری است");
+        //    }
+        //}
     }
 }

@@ -1,4 +1,4 @@
-﻿namespace Shop.Domain.RoleAgg.Enums;
+﻿namespace Proj.Domain.RoleAgg.Enums;
 
 public enum Permission
 {

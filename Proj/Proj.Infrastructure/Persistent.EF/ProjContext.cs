@@ -5,7 +5,6 @@ using Proj.Domain.MusicAgg;
 using Proj.Domain.MusicAlbumAgg;
 using Proj.Domain.RoleAgg;
 using Proj.Domain.UserAgg;
-using Shop.Domain.UserAgg;
 
 namespace Proj.Infrastructure.Persistent.EF;
 

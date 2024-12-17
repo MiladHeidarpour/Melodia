@@ -1,5 +1,5 @@
 ﻿using Common.Domain.Base;
-using Shop.Domain.RoleAgg.Enums;
+using Proj.Domain.RoleAgg.Enums;
 
 namespace Proj.Domain.RoleAgg;
 

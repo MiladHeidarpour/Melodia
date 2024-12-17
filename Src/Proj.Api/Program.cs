@@ -2,7 +2,9 @@ using Common.Application;
 using Common.Application.FileUtil.Interfaces;
 using Common.Application.FileUtil.Services;
 using Common.AspNetCore;
+using Common.AspNetCore.IGapUtil;
 using Common.AspNetCore.MiddleWares;
+using Common.AspNetCore.TelegramUtil;
 using Microsoft.AspNetCore.Mvc;
 using Proj.Api.Infrastructure;
 using Proj.Api.Infrastructure.JwtUtils;
@@ -41,6 +43,8 @@ builder.Services.RegisterApiDependency();
 
 CommonBootstrapper.Init(builder.Services);
 builder.Services.AddTransient<IFileService, FileService>();
+builder.Services.AddScoped<ITelegramService, TelegramService>();
+builder.Services.AddScoped<IIGapService,IGapService>();
 builder.Services.AddJwtAuthentication(builder.Configuration);
 
 var app = builder.Build();

@@ -24,7 +24,7 @@ internal class RegisterUserCommandHandler : IBaseCommandHandler<RegisterUserComm
     {
         var password = Sha256Hasher.Hash(request.Password);
         var userRole = await _roleRepository.GetByFunc(f => f.Title == "User");
-        var user = User.RegisterUser(userRole.Id, request.PhoneNumber.Value, password, _domainService);
+        var user = User.RegisterUser(userRole.Id, request.PhoneNumber, password, _domainService);
         await _repository.AddAsync(user);
         await _repository.Save();
         return OperationResult.Success("ثبت نام با موفقیت انجام شد");

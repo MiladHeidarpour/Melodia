@@ -1,5 +1,5 @@
 ﻿using Common.Query;
-using Shop.Domain.RoleAgg.Enums;
+using Proj.Domain.RoleAgg.Enums;
 
 namespace Proj.Query.Roles.Dtos;
 

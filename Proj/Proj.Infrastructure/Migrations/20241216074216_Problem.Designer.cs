@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Proj.Infrastructure.Persistent.EF;
 
@@ -11,9 +12,10 @@ using Proj.Infrastructure.Persistent.EF;
 namespace Proj.Infrastructure.Migrations
 {
     [DbContext(typeof(ProjContext))]
-    partial class ProjContextModelSnapshot : ModelSnapshot
+    [Migration("20241216074216_Problem")]
+    partial class Problem
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

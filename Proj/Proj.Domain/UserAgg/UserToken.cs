@@ -1,7 +1,7 @@
 ﻿using Common.Domain.Base;
 using Common.Domain.Exceptions;
 
-namespace Shop.Domain.UserAgg;
+namespace Proj.Domain.UserAgg;
 
 public class UserToken : BaseEntity
 {
@@ -24,7 +24,7 @@ public class UserToken : BaseEntity
     }
     private UserToken()
     {
-        
+
     }
     public void Guard(string hashJwtToken, string hashRefreshToken, DateTime tokenExpireDate, DateTime refreshTokenExpireDate, string device)
     {

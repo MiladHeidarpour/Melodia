@@ -1,7 +1,8 @@
 ﻿using Common.Application;
 using Common.Application.SecurityUtil;
 using Common.AspNetCore;
-using Common.Domain.ValueObjects;
+using Common.AspNetCore.IGapUtil;
+using Common.AspNetCore.TelegramUtil;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -20,11 +21,15 @@ public class AuthController : ApiController
 {
     private readonly IUserFacade _userFacade;
     private readonly IConfiguration _configuration;
+    private readonly ITelegramService _telegramService;
+    private readonly IIGapService _iGapService;
 
-    public AuthController(IUserFacade userFacade, IConfiguration configuration)
+    public AuthController(IUserFacade userFacade, IConfiguration configuration, ITelegramService telegramService, IIGapService iGapService)
     {
         _userFacade = userFacade;
         _configuration = configuration;
+        _telegramService = telegramService;
+        _iGapService = iGapService;
     }
 
     [HttpPost("Login")]
@@ -90,8 +95,17 @@ public class AuthController : ApiController
                 }
             };
         }
-        var command = new RegisterUserCommand(new PhoneNumber(registerViewModel.PhoneNumber), registerViewModel.Password);
+        var command = new RegisterUserCommand(registerViewModel.PhoneNumber, registerViewModel.Password);
         var result = await _userFacade.RegisterUser(command);
+
+
+        await _telegramService.SendMessage(
+            @$"*ملودیا بات*
+ادمین گرامی
+کاربر جدید با شماره {command.PhoneNumber} ثبت نام کرده است
+Telegram : t.me/+98{command.PhoneNumber.Substring(1)}
+WhatsApp : wa.me/+98{command.PhoneNumber.Substring(1)}");
+
         return CommandResult(result);
     }
     [HttpPost("RefreshToken")]

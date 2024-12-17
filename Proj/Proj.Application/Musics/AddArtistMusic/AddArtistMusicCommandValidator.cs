@@ -1,7 +1,8 @@
 ﻿using Common.Application.Validations;
 using FluentValidation;
+using Proj.Application.Musics.EditArtistMusic;
 
-namespace Proj.Application.Musics.EditArtistMusic;
+namespace Proj.Application.Musics.AddArtistMusic;
 
 public class AddArtistMusicCommandValidator : AbstractValidator<EditArtistMusicCommand>
 {

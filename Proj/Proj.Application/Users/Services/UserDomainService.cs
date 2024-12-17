@@ -11,10 +11,10 @@ public class UserDomainService:IUserDomainService
     {
         _repository = repository;
     }
-    public bool IsEmailExist(string email)
-    {
-        return _repository.Exists(s => s.Email == email);
-    }
+    //public bool IsEmailExist(string email)
+    //{
+    //    return _repository.Exists(s => s.Email == email);
+    //}
 
     public bool IsPhoneNumberExist(string phoneNumber)
     {

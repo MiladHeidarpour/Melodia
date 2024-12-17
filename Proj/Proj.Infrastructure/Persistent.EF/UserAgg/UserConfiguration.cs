@@ -11,7 +11,7 @@ public class UserConfiguration:IEntityTypeConfiguration<User>
         builder.ToTable("Users", "dbo");
         builder.HasKey(c => c.Id);
         builder.HasIndex(b => b.PhoneNumber).IsUnique();
-        builder.HasIndex(b => b.Email).IsUnique();
+        //builder.HasIndex(b => b.Email).IsUnique();
 
         builder.Property(c => c.RoleId).IsRequired();
         builder.Property(b => b.FullName).IsRequired(false).HasMaxLength(100);

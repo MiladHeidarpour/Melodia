@@ -1,5 +1,5 @@
 ﻿using Common.Application;
-using Shop.Domain.RoleAgg.Enums;
+using Proj.Domain.RoleAgg.Enums;
 
 namespace Proj.Application.Roles.Create;
 

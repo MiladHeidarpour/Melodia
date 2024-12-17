@@ -7,7 +7,7 @@ public class SeoDataViewModel
     public string? MetaTitle { get; set; }
     public string? MetaDescription { get; set; }
     public string? MetaKeyWords { get; set; }
-    public bool IndexPage { get; set; }
+    public bool IndexPage { get; set; } = false;
     public string? Canonical { get; set; }
     public string? Schema { get; set; }
 
