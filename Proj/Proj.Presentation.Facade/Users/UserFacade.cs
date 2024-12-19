@@ -11,6 +11,9 @@ using Proj.Query.Users.GetByFilter;
 using Proj.Query.Users.GetByPhoneNumber;
 using Proj.Query.Users.GetById;
 using Common.Application.SecurityUtil;
+using Proj.Application.Users.Create;
+using Proj.Application.Users.Delete;
+using Proj.Application.Users.Edit;
 using Proj.Query.Users.UserTokens.GetByRefreshToken;
 using Proj.Query.Users.UserTokens.GetByJwtToken;
 
@@ -23,6 +26,21 @@ public class UserFacade : IUserFacade
     public UserFacade(IMediator mediator)
     {
         _mediator = mediator;
+    }
+
+    public async Task<OperationResult> CreateUser(CreateUserCommand command)
+    {
+        return await _mediator.Send(command);
+    }
+
+    public async Task<OperationResult> EditUser(EditUserCommand command)
+    {
+        return await _mediator.Send(command);
+    }
+
+    public async Task<OperationResult> DeleteUser(DeleteUserCommand command)
+    {
+        return await _mediator.Send(command);
     }
 
     public async Task<OperationResult> RegisterUser(RegisterUserCommand command)

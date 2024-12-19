@@ -1,6 +1,6 @@
 ﻿using Common.Application;
 using Common.Application.SecurityUtil;
-using Common.AspNetCore;
+using Common.AspNetCore._Utils;
 using Common.AspNetCore.IGapUtil;
 using Common.AspNetCore.TelegramUtil;
 using Microsoft.AspNetCore.Authentication;
@@ -100,9 +100,11 @@ public class AuthController : ApiController
 
 
         await _telegramService.SendMessage(
-            @$"*ملودیا بات*
+            @$"🎵ملودیا بات🎵
 ادمین گرامی
-کاربر جدید با شماره {command.PhoneNumber} ثبت نام کرده است
+🙎‍♀️کاربر جدیدی ثبت نام کرده است🙎‍♂️
+تاریخ : {DateTime.Now.ToPersianDateAndTime("ds dd ms Y")}
+PhoneNumber : {command.PhoneNumber}
 Telegram : t.me/+98{command.PhoneNumber.Substring(1)}
 WhatsApp : wa.me/+98{command.PhoneNumber.Substring(1)}");
 

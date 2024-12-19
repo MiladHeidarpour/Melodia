@@ -1,7 +1,6 @@
 ﻿using Common.Domain.Base;
 using Common.Domain.Exceptions;
 using Proj.Domain.UserAgg.Services;
-using Common.Domain;
 
 namespace Proj.Domain.UserAgg;
 
@@ -19,7 +18,7 @@ public class User : AggregateRoot
     private User()
     {
     }
-    public User(long roleId, string fullName, string email, string phoneNumber, string password,IUserDomainService domainService)
+    public User(long roleId, string phoneNumber, string password,IUserDomainService domainService,string? fullName="", string? email = "")
     {
         Gaurd(phoneNumber, domainService);
         RoleId = roleId;
@@ -50,14 +49,14 @@ public class User : AggregateRoot
     {
         if (string.IsNullOrWhiteSpace(imageName))
         {
-            imageName = "avatar.png";
+            imageName = "Avatar.png";
         }
         Avatar = imageName;
     }
 
     public static User RegisterUser(long roleId,string phoneNumber, string password, IUserDomainService domainService)
     {
-        return new User(roleId,"","",phoneNumber,password,domainService);
+        return new User(roleId, phoneNumber, password,domainService,"","");
     }
 
     //UserToken

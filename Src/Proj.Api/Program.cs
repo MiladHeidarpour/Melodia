@@ -1,10 +1,7 @@
 using Common.Application;
-using Common.Application.FileUtil.Interfaces;
-using Common.Application.FileUtil.Services;
 using Common.AspNetCore;
-using Common.AspNetCore.IGapUtil;
+using Common.AspNetCore._Utils;
 using Common.AspNetCore.MiddleWares;
-using Common.AspNetCore.TelegramUtil;
 using Microsoft.AspNetCore.Mvc;
 using Proj.Api.Infrastructure;
 using Proj.Api.Infrastructure.JwtUtils;
@@ -42,9 +39,7 @@ builder.Services.RegisterProjDependency(connectionString);
 builder.Services.RegisterApiDependency();
 
 CommonBootstrapper.Init(builder.Services);
-builder.Services.AddTransient<IFileService, FileService>();
-builder.Services.AddScoped<ITelegramService, TelegramService>();
-builder.Services.AddScoped<IIGapService,IGapService>();
+CommonAspNetCoreBootstrapper.Init(builder.Services);
 builder.Services.AddJwtAuthentication(builder.Configuration);
 
 var app = builder.Build();
@@ -52,8 +47,8 @@ var app = builder.Build();
 // Configure the HTTP request pipeline.
 //if (app.Environment.IsDevelopment())
 //{
-    app.UseSwagger();
-    app.UseSwaggerUI();
+app.UseSwagger();
+app.UseSwaggerUI();
 //}
 
 app.UseHttpsRedirection();

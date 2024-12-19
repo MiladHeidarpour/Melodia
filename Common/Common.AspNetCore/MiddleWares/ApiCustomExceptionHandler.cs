@@ -1,5 +1,6 @@
 ﻿using System.Net;
 using Common.Application.Validations;
+using Common.AspNetCore._Utils;
 using Common.Domain.Exceptions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
