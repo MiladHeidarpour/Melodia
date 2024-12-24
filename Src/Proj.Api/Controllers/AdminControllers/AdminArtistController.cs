@@ -21,6 +21,11 @@ public class AdminArtistController : AdminApiController
 
     #region Query
 
+    /// <summary>
+    /// جستوجوی آرتیست بر اساس فیلتر
+    /// </summary>
+    /// <param name="filterParams">مقادیر جستوجو</param>
+    /// <returns>آرتیست های فیلتر شده</returns>
     [HttpGet("Filter")]
     public async Task<ApiResult<ArtistFilterResult>> GetArtistByFilter([FromQuery] ArtistFilterParams filterParams)
     {
@@ -28,6 +33,13 @@ public class AdminArtistController : AdminApiController
         return QueryResult(artists);
     }
 
+
+
+    /// <summary>
+    /// جستوجوی آرتیست بر اساس شناسه آرتیست
+    /// </summary>
+    /// <param name="artistId">شناسه آرتیست</param>
+    /// <returns>آرتیست</returns>
     [HttpGet("{artistId}")]
     public async Task<ApiResult<ArtistDto?>> GetArtistById(long artistId)
     {
@@ -35,6 +47,13 @@ public class AdminArtistController : AdminApiController
         return QueryResult(artist);
     }
 
+
+
+    /// <summary>
+    /// جستوجوی آرتیست بر اساس شناسه اسلاگ
+    /// </summary>
+    /// <param name="slug">شناسه اسلاگ</param>
+    /// <returns>آرتیست</returns>
     [HttpGet("BySlug/{slug}")]
     public async Task<ApiResult<ArtistDto?>> GetArtistBySlug(string slug)
     {
@@ -42,6 +61,12 @@ public class AdminArtistController : AdminApiController
         return QueryResult(artist);
     }
 
+
+
+    /// <summary>
+    /// لیستی از تمام آرتیست ها
+    /// </summary>
+    /// <returns>لیستی از تمام آرتیست ها</returns>
     [HttpGet("Lists")]
     public async Task<ApiResult<List<ArtistDto>>> GetArtistList()
     {
@@ -50,9 +75,13 @@ public class AdminArtistController : AdminApiController
     }
     #endregion
 
-
     #region Command
 
+
+    /// <summary>
+    /// ثبت آرتیست
+    /// </summary>
+    /// <param name="command">اطلاعات آرتیست</param>
     [HttpPost]
     public async Task<ApiResult> CreateArtist([FromForm] CreateArtistVM command)
     {
@@ -68,6 +97,12 @@ public class AdminArtistController : AdminApiController
         return CommandResult(result);
     }
 
+
+
+    /// <summary>
+    /// ویرایش آرتیست
+    /// </summary>
+    /// <param name="command">اطلاعات آرتیست</param>
     [HttpPut]
     public async Task<ApiResult> EditArtist([FromForm] EditArtistVM command)
     {
@@ -84,6 +119,12 @@ public class AdminArtistController : AdminApiController
         return CommandResult(result);
     }
 
+
+
+    /// <summary>
+    /// حذف آرتیست
+    /// </summary>
+    /// <param name="artistId">شناسه آرتیست</param>
     [HttpDelete("{artistId}")]
     public async Task<ApiResult> DeleteArtist(long artistId)
     {

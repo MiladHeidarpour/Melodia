@@ -4,6 +4,7 @@ using Proj.Application.MusicAlbums.Create;
 using Proj.Application.MusicAlbums.Delete;
 using Proj.Application.MusicAlbums.Edit;
 using Proj.Query.MusicAlbums.Dtos;
+using Proj.Query.MusicAlbums.GetByFilter;
 using Proj.Query.MusicAlbums.GetById;
 using Proj.Query.MusicAlbums.GetBySlug;
 using Proj.Query.MusicAlbums.GetList;
@@ -32,6 +33,11 @@ internal class MusicAlbumFacade : IMusicAlbumFacade
     public async Task<OperationResult> DeleteMusicAlbum(DeleteMusicAlbumCommand command)
     {
         return await _mediator.Send(command);
+    }
+
+    public async Task<MusicAlbumFilterResult> GetMusicAlbumByFilter(MusicAlbumFilterParams filterParams)
+    {
+        return await _mediator.Send(new GetMusicAlbumByFilterQuery(filterParams));
     }
 
     public async Task<MusicAlbumDto?> GetMusicAlbumById(long albumId)

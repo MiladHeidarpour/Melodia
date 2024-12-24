@@ -21,6 +21,11 @@ public class AdminCategoryController : AdminApiController
 
     #region Query
 
+    /// <summary>
+    /// جستوجوی دسته بندی بر اساس شناسه
+    /// </summary>
+    /// <param name="categoryId">شناسه دسته بندی</param>
+    /// <returns>دسته بندی</returns>
     [HttpGet("{categoryId}")]
     public async Task<ApiResult<CategoryDto?>> GetCategoryById(long categoryId)
     {
@@ -28,6 +33,13 @@ public class AdminCategoryController : AdminApiController
         return QueryResult(category);
     }
 
+
+
+    /// <summary>
+    /// جستوجوی دسته بندی بر اساس شناسه اسلاگ
+    /// </summary>
+    /// <param name="slug">شناسه اسلاگ</param>
+    /// <returns>دسته بندی</returns>
     [HttpGet("Slug/{slug}")]
     public async Task<ApiResult<CategoryDto?>> GetCategoryBySlug(string slug)
     {
@@ -35,6 +47,12 @@ public class AdminCategoryController : AdminApiController
         return QueryResult(category);
     }
 
+
+
+    /// <summary>
+    /// لیستی از تمام دسته بندی ها
+    /// </summary>
+    /// <returns>لیستی از تمام دسته بندی ها</returns>
     [HttpGet("Lists")]
     public async Task<ApiResult<List<CategoryDto>>> GetCategoryList()
     {
@@ -45,6 +63,10 @@ public class AdminCategoryController : AdminApiController
 
     #region Command
 
+    /// <summary>
+    /// ثبت دسته بندی
+    /// </summary>
+    /// <param name="command">اطلاعات دسته بندی</param>
     [HttpPost]
     public async Task<ApiResult> CreateCategory([FromForm] CreateCategoryVM command)
     {
@@ -58,6 +80,12 @@ public class AdminCategoryController : AdminApiController
         return CommandResult(result);
     }
 
+
+
+    /// <summary>
+    /// ویرایش دسته بندی
+    /// </summary>
+    /// <param name="command">اطلاعات دسته بندی</param>
     [HttpPut]
     public async Task<ApiResult> EditCategory([FromForm] EditCategoryVM command)
     {
@@ -72,6 +100,12 @@ public class AdminCategoryController : AdminApiController
         return CommandResult(result);
     }
 
+
+
+    /// <summary>
+    /// حذف دسته بندی
+    /// </summary>
+    /// <param name="categoryId">شناسه دسته بندی</param>
     [HttpDelete("{categoryId}")]
     public async Task<ApiResult> DeleteCategory(long categoryId)
     {

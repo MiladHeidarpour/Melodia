@@ -14,7 +14,7 @@ public class CreateMusicAlbumCommandValidator : AbstractValidator<CreateMusicAlb
 
         RuleFor(r => r.CoverImg).JustImageFile();
 
-        RuleFor(r => r.AlbumType).NotEmpty().WithMessage(ValidationMessages.required("نوع آلبوم"));
+        //RuleFor(r => r.AlbumType).NotEmpty().WithMessage(ValidationMessages.required("نوع آلبوم"));
 
         RuleFor(r => r.Slug)
             .NotEmpty().WithMessage(ValidationMessages.required("اسلاگ"));

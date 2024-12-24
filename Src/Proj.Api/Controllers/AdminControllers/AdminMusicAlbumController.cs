@@ -20,6 +20,25 @@ public class AdminMusicAlbumController : AdminApiController
 
     #region Query
 
+    /// <summary>
+    /// جستوجوی آلبوم بر اساس فیلتر
+    /// </summary>
+    /// <param name="filterParams">مقادیر جستوجو</param>
+    /// <returns>آلبوم های فیلتر شده</returns>
+    [HttpGet("Filter")]
+    public async Task<ApiResult<MusicAlbumFilterResult>> GetMusicAlbumByFilter(MusicAlbumFilterParams filterParams)
+    {
+        var musics = await _facade.GetMusicAlbumByFilter(filterParams);
+        return QueryResult(musics);
+    }
+
+
+
+    /// <summary>
+    /// جستوجوی آلبوم بر اساس شناسه آلبوم
+    /// </summary>
+    /// <param name="albumId">شناسه آلبوم</param>
+    /// <returns>آلبوم</returns>
     [HttpGet("{albumId}")]
     public async Task<ApiResult<MusicAlbumDto?>> GetMusicAlbumById(long albumId)
     {
@@ -27,6 +46,13 @@ public class AdminMusicAlbumController : AdminApiController
         return QueryResult(album);
     }
 
+
+
+    /// <summary>
+    /// جستوجوی آلبوم بر اساس شناسه اسلاگ
+    /// </summary>
+    /// <param name="slug">شناسه اسلاگ</param>
+    /// <returns>آلبوم</returns>
     [HttpGet("Slug/{slug}")]
     public async Task<ApiResult<MusicAlbumDto?>> GetMusicAlbumBySlug(string slug)
     {
@@ -34,6 +60,12 @@ public class AdminMusicAlbumController : AdminApiController
         return QueryResult(album);
     }
 
+
+
+    /// <summary>
+    /// لیستی از تمام آلبوم ها
+    /// </summary>
+    /// <returns>لیستی از تمام آلبوم ها</returns>
     [HttpGet("List")]
     public async Task<ApiResult<List<MusicAlbumDto>>> GetMusicAlbumList()
     {
@@ -45,6 +77,10 @@ public class AdminMusicAlbumController : AdminApiController
 
     #region Command
 
+    /// <summary>
+    /// ثبت آلبوم
+    /// </summary>
+    /// <param name="command">اطلاعات آلبوم</param>
     [HttpPost]
     public async Task<ApiResult> CreateMusicAlbum([FromForm] CreateMusicAlbumVM command)
     {
@@ -60,6 +96,12 @@ public class AdminMusicAlbumController : AdminApiController
         return CommandResult(result);
     }
 
+
+
+    /// <summary>
+    /// ویرایش آلبوم
+    /// </summary>
+    /// <param name="command">اطلاعات آلبوم</param>
     [HttpPut]
     public async Task<ApiResult> EditMusicAlbum([FromForm] EditMusicAlbumVM command)
     {
@@ -76,6 +118,12 @@ public class AdminMusicAlbumController : AdminApiController
         return CommandResult(result);
     }
 
+
+
+    /// <summary>
+    /// حذف آلبوم
+    /// </summary>
+    /// <param name="albumId">شناسه آلبوم</param>
     [HttpDelete("{albumId}")]
     public async Task<ApiResult> DeleteMusicAlbum(long albumId)
     {

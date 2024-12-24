@@ -1,5 +1,7 @@
-﻿using Proj.Domain.MusicAlbumAgg;
+﻿using Proj.Domain.MusicAgg;
+using Proj.Domain.MusicAlbumAgg;
 using Proj.Query.MusicAlbums.Dtos;
+using Proj.Query.Musics.Dtos;
 
 namespace Proj.Query.MusicAlbums.Mapper;
 
@@ -43,5 +45,15 @@ internal static class MusicAlbumMapper
             });
         });
         return model;
+    }
+
+    public static MusicAlbumFilterData MapListData(this MusicAlbum musicAlbum)
+    {
+        return new MusicAlbumFilterData()
+        {
+            Id = musicAlbum.Id,
+            CreationDate = musicAlbum.CreationDate,
+            Slug = musicAlbum.Slug,
+        };
     }
 }

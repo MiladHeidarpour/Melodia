@@ -20,6 +20,11 @@ public class AdminUserController : AdminApiController
 
     #region Query
 
+    /// <summary>
+    /// جستوجوی کاربر بر اساس شناسه ایمیل
+    /// </summary>
+    /// <param name="email">شناسه ایمیل</param>
+    /// <returns>کاربر</returns>
     [HttpGet("Email/{email}")]
     public async Task<ApiResult<UserDto?>> GetUserByEmail(string email)
     {
@@ -27,6 +32,13 @@ public class AdminUserController : AdminApiController
         return QueryResult(result);
     }
 
+
+
+    /// <summary>
+    /// جستوجوی کاربر بر اساس فیلتر
+    /// </summary>
+    /// <param name="filterParams">مقادیر جستوجو</param>
+    /// <returns>کاربر های فیلتر شده</returns>
     [HttpGet("GetByFilter")]
     public async Task<ApiResult<UserFilterResult>> GetUserByFilter(UserFilterParams filterParams)
     {
@@ -34,6 +46,13 @@ public class AdminUserController : AdminApiController
         return QueryResult(result);
     }
 
+
+
+    /// <summary>
+    /// جستوجوی کاربر بر اساس شناسه کاربر
+    /// </summary>
+    /// <param name="userId">شناسه کاربر</param>
+    /// <returns>کاربر</returns>
     [HttpGet("{userId}")]
     public async Task<ApiResult<UserDto?>> GetUserById(long userId)
     {
@@ -41,6 +60,13 @@ public class AdminUserController : AdminApiController
         return QueryResult(result);
     }
 
+
+
+    /// <summary>
+    /// جستوجوی کاربر بر اساس شناسه تلفن
+    /// </summary>
+    /// <param name="phoneNumber">شناسه تلفن</param>
+    /// <returns>کاربر</returns>
     [HttpGet("PhoneNumber/{phoneNumber}")]
     public async Task<ApiResult<UserDto?>> GetUserByPhoneNumber(string phoneNumber)
     {
@@ -52,6 +78,10 @@ public class AdminUserController : AdminApiController
 
     #region Command
 
+    /// <summary>
+    /// ثبت کاربر
+    /// </summary>
+    /// <param name="command">اطلاعات کاربر</param>
     [HttpPost]
     //باید عکس هم اضافه کند
     //تلگرام هم پیام ارسال کند
@@ -69,12 +99,23 @@ public class AdminUserController : AdminApiController
         return CommandResult(result);
     }
 
+
+
+    /// <summary>
+    /// ویرایش کاربر
+    /// </summary>
+    /// <param name="command">اطلاعات کاربر</param>
     [HttpPut]
     public async Task EditUser()
     {
         return ;
     }
 
+
+    /// <summary>
+    /// حذف کاربر
+    /// </summary>
+    /// <param name="userId">شناسه کاربر</param>
     [HttpDelete("{userId}")]
     public async Task<ApiResult> DeleteUser(long userId)
     {

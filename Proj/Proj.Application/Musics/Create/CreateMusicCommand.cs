@@ -15,5 +15,5 @@ public class CreateMusicCommand : IBaseCommand
     public string? Lyric { get; set; }
     public string Slug { get; set; }
     public SeoData SeoData { get; set; }
-    public List<ArtistMusic> ArtistMusics { get; set; }
+    public ArtistMusic ArtistMusic { get; set; }
 }

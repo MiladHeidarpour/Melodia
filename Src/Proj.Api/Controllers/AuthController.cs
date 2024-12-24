@@ -80,6 +80,11 @@ public class AuthController : ApiController
         return CommandResult(loginResult);
     }
 
+
+    /// <summary>
+    /// ثبت نام
+    /// </summary>
+    /// <param name="registerViewModel">اطلاعات کاربر</param>
     [HttpPost("Register")]
     public async Task<ApiResult> Register(RegisterVM registerViewModel)
     {
@@ -98,15 +103,17 @@ public class AuthController : ApiController
         var command = new RegisterUserCommand(registerViewModel.PhoneNumber, registerViewModel.Password);
         var result = await _userFacade.RegisterUser(command);
 
-
-        await _telegramService.SendMessage(
-            @$"🎵ملودیا بات🎵
+        if (result.Status == OperationResultStatus.Success)
+        {
+            await _telegramService.SendMessage(
+                @$"🎵ملودیا بات🎵
 ادمین گرامی
 🙎‍♀️کاربر جدیدی ثبت نام کرده است🙎‍♂️
 تاریخ : {DateTime.Now.ToPersianDateAndTime("ds dd ms Y")}
 PhoneNumber : {command.PhoneNumber}
 Telegram : t.me/+98{command.PhoneNumber.Substring(1)}
 WhatsApp : wa.me/+98{command.PhoneNumber.Substring(1)}");
+        }
 
         return CommandResult(result);
     }

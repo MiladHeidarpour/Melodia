@@ -1,0 +1,186 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Proj.Api</name>
+    </assembly>
+    <members>
+        <member name="M:Proj.Api.Controllers.AdminControllers.AdminArtistController.GetArtistByFilter(Proj.Query.Artists.Dtos.ArtistFilterParams)">
+            <summary>
+            جستوجوی آرتیست بر اساس فیلتر
+            </summary>
+            <param name="filterParams">مقادیر جستوجو</param>
+            <returns>آرتیست های فیلتر شده</returns>
+        </member>
+        <member name="M:Proj.Api.Controllers.AdminControllers.AdminArtistController.GetArtistById(System.Int64)">
+            <summary>
+            جستوجوی آرتیست بر اساس شناسه آرتیست
+            </summary>
+            <param name="artistId">شناسه آرتیست</param>
+            <returns>آرتیست</returns>
+        </member>
+        <member name="M:Proj.Api.Controllers.AdminControllers.AdminArtistController.GetArtistBySlug(System.String)">
+            <summary>
+            جستوجوی آرتیست بر اساس شناسه اسلاگ
+            </summary>
+            <param name="slug">شناسه اسلاگ</param>
+            <returns>آرتیست</returns>
+        </member>
+        <member name="M:Proj.Api.Controllers.AdminControllers.AdminArtistController.GetArtistList">
+            <summary>
+            لیستی از تمام آرتیست ها
+            </summary>
+            <returns>لیستی از تمام آرتیست ها</returns>
+        </member>
+        <member name="M:Proj.Api.Controllers.AdminControllers.AdminArtistController.CreateArtist(Proj.Api.ViewModels.Admins.Artists.CreateArtistVM)">
+            <summary>
+            ثبت آرتیست
+            </summary>
+            <param name="command">اطلاعات آرتیست</param>
+        </member>
+        <member name="M:Proj.Api.Controllers.AdminControllers.AdminArtistController.EditArtist(Proj.Api.ViewModels.Admins.Artists.EditArtistVM)">
+            <summary>
+            ویرایش آرتیست
+            </summary>
+            <param name="command">اطلاعات آرتیست</param>
+        </member>
+        <member name="M:Proj.Api.Controllers.AdminControllers.AdminArtistController.DeleteArtist(System.Int64)">
+            <summary>
+            حذف آرتیست
+            </summary>
+            <param name="artistId">شناسه آرتیست</param>
+        </member>
+        <member name="M:Proj.Api.Controllers.AdminControllers.AdminMusicController.GetMusicByFilter(Proj.Query.Musics.Dtos.MusicFilterParams)">
+            <summary>
+            جستوجوی موزیک بر اساس فیلتر
+            </summary>
+            <param name="filterParams">مقادیر جستوجو</param>
+            <returns>موزیک های فیلتر شده</returns>
+        </member>
+        <member name="M:Proj.Api.Controllers.AdminControllers.AdminMusicController.GetMusicById(System.Int64)">
+            <summary>
+            جستوجوی موزیک بر اساس شناسه موزیک
+            </summary>
+            <param name="musicId">شناسه موزیک</param>
+            <returns>موزیک</returns>
+        </member>
+        <member name="M:Proj.Api.Controllers.AdminControllers.AdminMusicController.GetMusicBySlug(System.String)">
+            <summary>
+            جستوجوی موزیک بر اساس شناسه اسلاگ
+            </summary>
+            <param name="slug">شناسه اسلاگ</param>
+            <returns>موزیک</returns>
+        </member>
+        <member name="M:Proj.Api.Controllers.AdminControllers.AdminMusicController.GetMusicList">
+            <summary>
+            لیستی از تمام موزیک ها
+            </summary>
+            <returns>لیستی از تمام موزیک ها</returns>
+        </member>
+        <member name="M:Proj.Api.Controllers.AdminControllers.AdminMusicController.GetArtistMusic(System.Int64)">
+            <summary>
+            جستوجوی آرتیست های موزیک بر اساس شناسه آرتیست
+            </summary>
+            <param name="artistMusicId">شناسه آرتیست</param>
+            <returns>آرتیست های موزیک</returns>
+        </member>
+        <member name="M:Proj.Api.Controllers.AdminControllers.AdminMusicController.GetArtistMusicList(System.Int64)">
+            <summary>
+            جستوجوی آرتیست های موزیک بر اساس شناسه موزیک
+            </summary>
+            <param name="musicId">شناسه موزیک</param>
+            <returns>آرتیست های موزیک</returns>
+        </member>
+        <member name="M:Proj.Api.Controllers.AdminControllers.AdminMusicController.CreateMusic(Proj.Api.ViewModels.Admins.Musics.CreateMusicVM)">
+            <summary>
+            ثبت موزیک
+            </summary>
+            <param name="command">اطلاعات موزیک</param>
+        </member>
+        <member name="M:Proj.Api.Controllers.AdminControllers.AdminMusicController.EditMusic(Proj.Api.ViewModels.Admins.Musics.EditMusicVM)">
+            <summary>
+            ویرایش موزیک
+            </summary>
+            <param name="command">اطلاعات موزیک</param>
+        </member>
+        <member name="M:Proj.Api.Controllers.AdminControllers.AdminMusicController.DeleteMusic(System.Int64)">
+            <summary>
+            حذف موزیک
+            </summary>
+            <param name="musicId">شناسه موزیک</param>
+        </member>
+        <member name="M:Proj.Api.Controllers.AdminControllers.AdminMusicController.AddArtistMusic(System.Collections.Generic.List{Proj.Api.ViewModels.Admins.Musics.ArtistMusic.AddArtistMusicVM})">
+            <summary>
+            افزودن آرتیست برای موزیک
+            </summary>
+            <param name="command">اطلاعات</param>
+        </member>
+        <member name="M:Proj.Api.Controllers.AdminControllers.AdminMusicController.EditArtistMusic(Proj.Api.ViewModels.Admins.Musics.ArtistMusic.EditArtistMusicVM)">
+            <summary>
+            ویرایش آرتیست برای موزیک
+            </summary>
+            <param name="command">اطلاعات</param>
+        </member>
+        <member name="M:Proj.Api.Controllers.AdminControllers.AdminMusicController.DeleteArtistMusic(Proj.Application.Musics.DeleteArtistMusic.DeleteArtistMusicCommand)">
+            <summary>
+            حذف آرتیست برای موزیک
+            </summary>
+            <param name="command">اطلاعات</param>
+        </member>
+        <member name="M:Proj.Api.Controllers.AuthController.Register(Proj.Api.ViewModels.Auth.RegisterVM)">
+            <summary>
+            ثبت نام
+            </summary>
+            <param name="registerViewModel">اطلاعات کاربر</param>
+        </member>
+        <member name="T:Proj.Api.ViewModels.Admins.Musics.CreateMusicVM">
+            <summary>
+            مدل ثبت موزیک
+            </summary>
+        </member>
+        <member name="P:Proj.Api.ViewModels.Admins.Musics.CreateMusicVM.TrackName">
+            <summary>
+            نام موزیک
+            </summary>
+        </member>
+        <member name="P:Proj.Api.ViewModels.Admins.Musics.CreateMusicVM.AlbumId">
+            <summary>
+            آلبوم
+            </summary>
+        </member>
+        <member name="P:Proj.Api.ViewModels.Admins.Musics.CreateMusicVM.TrackFile">
+            <summary>
+            فایل موزیک
+            </summary>
+        </member>
+        <member name="P:Proj.Api.ViewModels.Admins.Musics.CreateMusicVM.TrackTime">
+            <summary>
+             مدت زمان
+            </summary>
+        </member>
+        <member name="P:Proj.Api.ViewModels.Admins.Musics.CreateMusicVM.ReleaseDate">
+            <summary>
+             تاریخ انتشار
+            </summary>
+        </member>
+        <member name="P:Proj.Api.ViewModels.Admins.Musics.CreateMusicVM.Lyric">
+            <summary>
+            متن 
+            </summary>
+        </member>
+        <member name="P:Proj.Api.ViewModels.Admins.Musics.CreateMusicVM.Slug">
+            <summary>
+             اسلاگ
+            </summary>
+        </member>
+        <member name="P:Proj.Api.ViewModels.Admins.Musics.CreateMusicVM.SeoData">
+            <summary>
+             سئو
+            </summary>
+        </member>
+        <member name="P:Proj.Api.ViewModels.Admins.Musics.CreateMusicVM.ArtistMusic">
+            <summary>
+             خواننده
+            </summary>
+        </member>
+    </members>
+</doc>
