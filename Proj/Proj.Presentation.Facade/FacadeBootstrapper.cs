@@ -5,6 +5,7 @@ using Proj.Presentation.Facade.MusicAlbums;
 using Proj.Presentation.Facade.Musics;
 using Proj.Presentation.Facade.Roles;
 using Proj.Presentation.Facade.Users;
+using Proj.Presentation.Facade.Verifications;
 
 namespace Proj.Presentation.Facade;
 
@@ -18,5 +19,6 @@ public static class FacadeBootstrapper
         services.AddScoped<IMusicFacade, MusicFacade>();
         services.AddScoped<IUserFacade, UserFacade>();
         services.AddScoped<IRoleFacade, RoleFacade>();
+        services.AddScoped<IVerificationFacade, VerificationFacade>();
     }
 }

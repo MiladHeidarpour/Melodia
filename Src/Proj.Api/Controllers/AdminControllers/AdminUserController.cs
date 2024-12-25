@@ -1,4 +1,6 @@
-﻿using Common.AspNetCore._Utils;
+﻿using Common.Application;
+using Common.AspNetCore._Utils;
+using Common.AspNetCore.TelegramUtil;
 using Microsoft.AspNetCore.Mvc;
 using Proj.Api.ViewModels.Admins.Users;
 using Proj.Application.Users.Create;
@@ -12,10 +14,12 @@ namespace Proj.Api.Controllers.AdminControllers;
 public class AdminUserController : AdminApiController
 {
     private readonly IUserFacade _facade;
+    private readonly ITelegramService _telegramService;
 
-    public AdminUserController(IUserFacade facade)
+    public AdminUserController(IUserFacade facade, ITelegramService telegramService)
     {
         _facade = facade;
+        _telegramService = telegramService;
     }
 
     #region Query
@@ -83,18 +87,29 @@ public class AdminUserController : AdminApiController
     /// </summary>
     /// <param name="command">اطلاعات کاربر</param>
     [HttpPost]
-    //باید عکس هم اضافه کند
-    //تلگرام هم پیام ارسال کند
-    public async Task<ApiResult> CreateUser(CreateUserVm command)
+    public async Task<ApiResult> CreateUser([FromForm] CreateUserVm command)
     {
         var result = await _facade.CreateUser(new CreateUserCommand()
         {
             RoleId = command.RoleId,
             FullName = command.FullName,
+            Avatar = command.Avatar,
             Email = command.Email,
             PhoneNumber = command.PhoneNumber,
             Password = command.Password
         });
+
+        if (result.Status == OperationResultStatus.Success)
+        {
+            await _telegramService.SendMessage(
+                @$"🎵ملودیا بات🎵
+ادمین گرامی
+🙎‍♀️کاربر جدیدی ثبت نام کرده است🙎‍♂️
+تاریخ : {DateTime.Now.ToPersianDateAndTime("ds dd ms Y")}
+PhoneNumber : {command.PhoneNumber}
+Telegram : t.me/+98{command.PhoneNumber.Substring(1)}
+WhatsApp : wa.me/+98{command.PhoneNumber.Substring(1)}");
+        }
 
         return CommandResult(result);
     }
@@ -108,7 +123,7 @@ public class AdminUserController : AdminApiController
     [HttpPut]
     public async Task EditUser()
     {
-        return ;
+        return;
     }
 
 

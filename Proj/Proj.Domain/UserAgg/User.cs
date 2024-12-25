@@ -1,6 +1,9 @@
-﻿using Common.Domain.Base;
+﻿using Common.Domain;
+using Common.Domain.Base;
 using Common.Domain.Exceptions;
+using Common.Domain.ValueObjects;
 using Proj.Domain.UserAgg.Services;
+using Proj.Domain.VerificationAgg;
 
 namespace Proj.Domain.UserAgg;
 
@@ -18,9 +21,9 @@ public class User : AggregateRoot
     private User()
     {
     }
-    public User(long roleId, string phoneNumber, string password,IUserDomainService domainService,string? fullName="", string? email = "")
+    public User(long roleId, string password, IUserDomainService domainService, string? phoneNumber = "", string? email = "", string? fullName = "")
     {
-        Gaurd(phoneNumber, domainService);
+        Guard(email, phoneNumber, domainService);
         RoleId = roleId;
         FullName = fullName;
         Email = email;
@@ -33,7 +36,7 @@ public class User : AggregateRoot
 
     public void Edit(string fullName, string email, string phoneNumber, IUserDomainService domainService)
     {
-        Gaurd(phoneNumber, domainService);
+        Guard(email, phoneNumber, domainService);
         FullName = fullName;
         PhoneNumber = phoneNumber;
         Email = email;
@@ -54,9 +57,14 @@ public class User : AggregateRoot
         Avatar = imageName;
     }
 
-    public static User RegisterUser(long roleId,string phoneNumber, string password, IUserDomainService domainService)
+    public static User RegisterUserPhoneNumber(long roleId, string phoneNumber, string password, IUserDomainService domainService)
     {
-        return new User(roleId, phoneNumber, password,domainService,"","");
+        return new User(roleId, password, domainService, phoneNumber, "", "");
+    }
+
+    public static User RegisterUserEmail(long roleId, string email, string password, IUserDomainService domainService)
+    {
+        return new User(roleId, password, domainService, "", email, "");
     }
 
     //UserToken
@@ -81,36 +89,43 @@ public class User : AggregateRoot
         Tokens.Remove(token);
         return token.HashJwtToken;
     }
-    //Gaurd
-    public void Gaurd(string phoneNumber, IUserDomainService domainService)
-    {
-        NullOrEmptyDomainDataException.CheckString(phoneNumber, nameof(phoneNumber));
-        if (phoneNumber.Length != 11)//length<11 || length>11
-        {
-            throw new InvalidDomainDataException("شماره موبایل نامعتبر است");
-        }
 
-        if (phoneNumber != PhoneNumber)
+
+    //Guard
+    private void Guard(string? email, string? phoneNumber, IUserDomainService domainService)
+    {
+        if (string.IsNullOrWhiteSpace(PhoneNumber) == false)
         {
-            if (domainService.IsPhoneNumberExist(phoneNumber) == true)
+            if (phoneNumber.Length != 11)//length<11 || length>11
             {
-                throw new InvalidDomainDataException("شماره موبایل تکراری است");
+                throw new InvalidDomainDataException("شماره موبایل نامعتبر است");
+            }
+
+            if (phoneNumber != PhoneNumber)
+            {
+                if (domainService.IsPhoneNumberExist(phoneNumber) == true)
+                {
+                    throw new InvalidDomainDataException("شماره موبایل تکراری است");
+                }
             }
         }
 
-        //if (!string.IsNullOrWhiteSpace(email))
-        //{
-        //    if (email.IsValidEmail() == false)
-        //    {
-        //        throw new InvalidDomainDataException("ایمیل نامعتبر است");
-        //    }
-        //}
-        //if (email != Email)
-        //{
-        //    if (domainService.IsEmailExist(email) == true)
-        //    {
-        //        throw new InvalidDomainDataException("ایمیل تکراری است");
-        //    }
-        //}
+        if (string.IsNullOrWhiteSpace(email) == false)
+        {
+            if (!string.IsNullOrWhiteSpace(email))
+            {
+                if (email.IsValidEmail() == false)
+                {
+                    throw new InvalidDomainDataException("ایمیل نامعتبر است");
+                }
+            }
+            if (email != Email)
+            {
+                if (domainService.IsEmailExist(email) == true)
+                {
+                    throw new InvalidDomainDataException("ایمیل تکراری است");
+                }
+            }
+        }
     }
 }

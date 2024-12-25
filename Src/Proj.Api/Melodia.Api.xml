@@ -49,6 +49,89 @@
             </summary>
             <param name="artistId">شناسه آرتیست</param>
         </member>
+        <member name="M:Proj.Api.Controllers.AdminControllers.AdminCategoryController.GetCategoryById(System.Int64)">
+            <summary>
+            جستوجوی دسته بندی بر اساس شناسه
+            </summary>
+            <param name="categoryId">شناسه دسته بندی</param>
+            <returns>دسته بندی</returns>
+        </member>
+        <member name="M:Proj.Api.Controllers.AdminControllers.AdminCategoryController.GetCategoryBySlug(System.String)">
+            <summary>
+            جستوجوی دسته بندی بر اساس شناسه اسلاگ
+            </summary>
+            <param name="slug">شناسه اسلاگ</param>
+            <returns>دسته بندی</returns>
+        </member>
+        <member name="M:Proj.Api.Controllers.AdminControllers.AdminCategoryController.GetCategoryList">
+            <summary>
+            لیستی از تمام دسته بندی ها
+            </summary>
+            <returns>لیستی از تمام دسته بندی ها</returns>
+        </member>
+        <member name="M:Proj.Api.Controllers.AdminControllers.AdminCategoryController.CreateCategory(Proj.Api.ViewModels.Admins.Categories.CreateCategoryVM)">
+            <summary>
+            ثبت دسته بندی
+            </summary>
+            <param name="command">اطلاعات دسته بندی</param>
+        </member>
+        <member name="M:Proj.Api.Controllers.AdminControllers.AdminCategoryController.EditCategory(Proj.Api.ViewModels.Admins.Categories.EditCategoryVM)">
+            <summary>
+            ویرایش دسته بندی
+            </summary>
+            <param name="command">اطلاعات دسته بندی</param>
+        </member>
+        <member name="M:Proj.Api.Controllers.AdminControllers.AdminCategoryController.DeleteCategory(System.Int64)">
+            <summary>
+            حذف دسته بندی
+            </summary>
+            <param name="categoryId">شناسه دسته بندی</param>
+        </member>
+        <member name="M:Proj.Api.Controllers.AdminControllers.AdminMusicAlbumController.GetMusicAlbumByFilter(Proj.Query.MusicAlbums.Dtos.MusicAlbumFilterParams)">
+            <summary>
+            جستوجوی آلبوم بر اساس فیلتر
+            </summary>
+            <param name="filterParams">مقادیر جستوجو</param>
+            <returns>آلبوم های فیلتر شده</returns>
+        </member>
+        <member name="M:Proj.Api.Controllers.AdminControllers.AdminMusicAlbumController.GetMusicAlbumById(System.Int64)">
+            <summary>
+            جستوجوی آلبوم بر اساس شناسه آلبوم
+            </summary>
+            <param name="albumId">شناسه آلبوم</param>
+            <returns>آلبوم</returns>
+        </member>
+        <member name="M:Proj.Api.Controllers.AdminControllers.AdminMusicAlbumController.GetMusicAlbumBySlug(System.String)">
+            <summary>
+            جستوجوی آلبوم بر اساس شناسه اسلاگ
+            </summary>
+            <param name="slug">شناسه اسلاگ</param>
+            <returns>آلبوم</returns>
+        </member>
+        <member name="M:Proj.Api.Controllers.AdminControllers.AdminMusicAlbumController.GetMusicAlbumList">
+            <summary>
+            لیستی از تمام آلبوم ها
+            </summary>
+            <returns>لیستی از تمام آلبوم ها</returns>
+        </member>
+        <member name="M:Proj.Api.Controllers.AdminControllers.AdminMusicAlbumController.CreateMusicAlbum(Proj.Api.ViewModels.Admins.MusicAlbums.CreateMusicAlbumVM)">
+            <summary>
+            ثبت آلبوم
+            </summary>
+            <param name="command">اطلاعات آلبوم</param>
+        </member>
+        <member name="M:Proj.Api.Controllers.AdminControllers.AdminMusicAlbumController.EditMusicAlbum(Proj.Api.ViewModels.Admins.MusicAlbums.EditMusicAlbumVM)">
+            <summary>
+            ویرایش آلبوم
+            </summary>
+            <param name="command">اطلاعات آلبوم</param>
+        </member>
+        <member name="M:Proj.Api.Controllers.AdminControllers.AdminMusicAlbumController.DeleteMusicAlbum(System.Int64)">
+            <summary>
+            حذف آلبوم
+            </summary>
+            <param name="albumId">شناسه آلبوم</param>
+        </member>
         <member name="M:Proj.Api.Controllers.AdminControllers.AdminMusicController.GetMusicByFilter(Proj.Query.Musics.Dtos.MusicFilterParams)">
             <summary>
             جستوجوی موزیک بر اساس فیلتر
@@ -126,11 +209,133 @@
             </summary>
             <param name="command">اطلاعات</param>
         </member>
-        <member name="M:Proj.Api.Controllers.AuthController.Register(Proj.Api.ViewModels.Auth.RegisterVM)">
+        <member name="M:Proj.Api.Controllers.AdminControllers.AdminRoleController.GetRoleById(System.Int64)">
             <summary>
-            ثبت نام
+            جستوجوی نقش بر اساس شناسه نقش
+            </summary>
+            <param name="roleId">شناسه نقش</param>
+            <returns>نقش</returns>
+        </member>
+        <member name="M:Proj.Api.Controllers.AdminControllers.AdminRoleController.GetRoles">
+            <summary>
+            لیستی از تمام نقش ها
+            </summary>
+            <returns>لیستی از تمام نقش ها</returns>
+        </member>
+        <member name="M:Proj.Api.Controllers.AdminControllers.AdminRoleController.CreateRole(Proj.Api.ViewModels.Admins.Roles.CreateRoleVM)">
+            <summary>
+            ثبت نقش
+            </summary>
+            <param name="command">اطلاعات نقش</param>
+        </member>
+        <member name="M:Proj.Api.Controllers.AdminControllers.AdminRoleController.EditRole(Proj.Api.ViewModels.Admins.Roles.EditRoleVM)">
+            <summary>
+            ویرایش نقش
+            </summary>
+            <param name="command">اطلاعات نقش</param>
+        </member>
+        <member name="M:Proj.Api.Controllers.AdminControllers.AdminRoleController.DeleteRole(System.Int64)">
+            <summary>
+            حذف نقش
+            </summary>
+            <param name="roleId">شناسه نقش</param>
+        </member>
+        <member name="M:Proj.Api.Controllers.AdminControllers.AdminUserController.GetUserByEmail(System.String)">
+            <summary>
+            جستوجوی کاربر بر اساس شناسه ایمیل
+            </summary>
+            <param name="email">شناسه ایمیل</param>
+            <returns>کاربر</returns>
+        </member>
+        <member name="M:Proj.Api.Controllers.AdminControllers.AdminUserController.GetUserByFilter(Proj.Query.Users.DTOs.UserFilterParams)">
+            <summary>
+            جستوجوی کاربر بر اساس فیلتر
+            </summary>
+            <param name="filterParams">مقادیر جستوجو</param>
+            <returns>کاربر های فیلتر شده</returns>
+        </member>
+        <member name="M:Proj.Api.Controllers.AdminControllers.AdminUserController.GetUserById(System.Int64)">
+            <summary>
+            جستوجوی کاربر بر اساس شناسه کاربر
+            </summary>
+            <param name="userId">شناسه کاربر</param>
+            <returns>کاربر</returns>
+        </member>
+        <member name="M:Proj.Api.Controllers.AdminControllers.AdminUserController.GetUserByPhoneNumber(System.String)">
+            <summary>
+            جستوجوی کاربر بر اساس شناسه تلفن
+            </summary>
+            <param name="phoneNumber">شناسه تلفن</param>
+            <returns>کاربر</returns>
+        </member>
+        <member name="M:Proj.Api.Controllers.AdminControllers.AdminUserController.CreateUser(Proj.Api.ViewModels.Admins.Users.CreateUserVm)">
+            <summary>
+            ثبت کاربر
+            </summary>
+            <param name="command">اطلاعات کاربر</param>
+        </member>
+        <member name="M:Proj.Api.Controllers.AdminControllers.AdminUserController.EditUser">
+            <summary>
+            ویرایش کاربر
+            </summary>
+            <param name="command">اطلاعات کاربر</param>
+        </member>
+        <member name="M:Proj.Api.Controllers.AdminControllers.AdminUserController.DeleteUser(System.Int64)">
+            <summary>
+            حذف کاربر
+            </summary>
+            <param name="userId">شناسه کاربر</param>
+        </member>
+        <member name="M:Proj.Api.Controllers.AuthController.RegisterCode(System.String)">
+            <summary>
+            ثبت نام با کد تایید
+            </summary>
+            <param name="userIdentifier">اطلاعات کاربر</param>
+        </member>
+        <member name="M:Proj.Api.Controllers.AuthController.Verify(System.String,System.Int64)">
+            <summary>
+            تایید کد ورود
+            </summary>
+            <param name="code">کد تایید</param>
+        </member>
+        <member name="M:Proj.Api.Controllers.AuthController.ResendCode(System.Int64)">
+            <summary>
+            ارسال کد مجدد
+            </summary>
+            <param name="verificationId">اطلاعات کاربر</param>
+        </member>
+        <member name="M:Proj.Api.Controllers.AuthController.Active(Proj.Api.ViewModels.Auth.RegisterVM,System.Int64)">
+            <summary>
+            ثبت نام کاربر
             </summary>
             <param name="registerViewModel">اطلاعات کاربر</param>
+        </member>
+        <member name="M:Proj.Api.Controllers.AuthController.Login(Proj.Api.ViewModels.Auth.LoginVM)">
+            <summary>
+            ورود کاربر
+            </summary>
+            <param name="loginVm">اطلاعات کاربر</param>
+        </member>
+        <member name="M:Proj.Api.Controllers.AuthController.RefreshToken(System.String)">
+            <summary>
+            رفرش توکن
+            </summary>
+            <param name="refreshToken">اطلاعات توکن</param>
+        </member>
+        <member name="M:Proj.Api.Controllers.AuthController.LogOut">
+            <summary>
+            خروج کاربر
+            </summary>
+        </member>
+        <member name="M:Proj.Api.Controllers.AuthController.GenerateCodeAndSet(System.String)">
+            <summary>
+            ساخت کد تایید و ارسال آن
+            </summary>
+        </member>
+        <member name="M:Proj.Api.Controllers.AuthController.AddTokenAndGenerateJwt(Proj.Query.Users.Dtos.UserDto)">
+            <summary>
+            ساهت توکن کاربر
+            </summary>
         </member>
         <member name="T:Proj.Api.ViewModels.Admins.Musics.CreateMusicVM">
             <summary>

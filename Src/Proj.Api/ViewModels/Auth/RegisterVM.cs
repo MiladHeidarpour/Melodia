@@ -5,11 +5,11 @@ namespace Proj.Api.ViewModels.Auth;
 
 public class RegisterVM
 {
-    [Display(Name = "شماره تلفن")]
-    [Required(ErrorMessage = "شماره تلفن را وارد کنید")]
-    [MaxLength(11, ErrorMessage = ValidationMessages.InvalidPhoneNumber)]
-    [MinLength(11, ErrorMessage = ValidationMessages.InvalidPhoneNumber)]
-    public string PhoneNumber { get; set; }
+    //[Display(Name = "شماره تلفن")]
+    //[Required(ErrorMessage = "شماره تلفن را وارد کنید")]
+    //[MaxLength(11, ErrorMessage = ValidationMessages.InvalidPhoneNumber)]
+    //[MinLength(11, ErrorMessage = ValidationMessages.InvalidPhoneNumber)]
+    //public string UserIdentifier { get; set; }
 
     [Display(Name = "کلمه عبور")]
     [Required(ErrorMessage = "کلمه عبور را وارد کنید")]

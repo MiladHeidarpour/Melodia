@@ -5,6 +5,7 @@ using Proj.Domain.MusicAgg;
 using Proj.Domain.MusicAlbumAgg;
 using Proj.Domain.RoleAgg;
 using Proj.Domain.UserAgg;
+using Proj.Domain.VerificationAgg;
 
 namespace Proj.Infrastructure.Persistent.EF;
 
@@ -20,6 +21,7 @@ public class ProjContext : DbContext
     public DbSet<MusicAlbum> MusicAlbums { get; set; }
     public DbSet<User> Users { get; set; }
     public DbSet<Role> Roles { get; set; }
+    public DbSet<Verification> Verifications { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {

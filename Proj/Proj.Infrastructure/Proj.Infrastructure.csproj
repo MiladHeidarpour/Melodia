@@ -21,6 +21,7 @@
 
   <ItemGroup>
     <Folder Include="Persistent.Dapper\" />
+    <Folder Include="Persistent.EF\VerificationAgg\" />
     <Folder Include="Persistent.EF\RoleAgg\" />
   </ItemGroup>
 

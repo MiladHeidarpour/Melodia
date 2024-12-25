@@ -23,6 +23,7 @@
     <Folder Include="Users\GetByPhoneNumber\" />
     <Folder Include="Users\UserTokens\GetByJwtToken\" />
     <Folder Include="Users\UserTokens\GetByRefreshToken\" />
+    <Folder Include="Verifications\Mapper\" />
   </ItemGroup>
 
   <ItemGroup>

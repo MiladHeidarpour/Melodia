@@ -12,6 +12,8 @@ public class CreateUserVm
     [MaxLength(100,ErrorMessage = "نام و نام خانوادگی نمیتواند بیشتر از 100 کارکتر باشد")]
     public string? FullName { get; set; }
 
+    [Display(Name = "تصویر")]
+    public IFormFile? Avatar { get; set; }
 
     [Display(Name = "ایمیل")]
     [MaxLength(256, ErrorMessage = "ایمیل زیادی طولانی است!")]

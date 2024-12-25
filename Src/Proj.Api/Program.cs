@@ -1,8 +1,12 @@
 ﻿using Common.Application;
 using Common.AspNetCore;
 using Common.AspNetCore._Utils;
+using Common.AspNetCore.EmailUtil;
 using Common.AspNetCore.MiddleWares;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
+using NETCore.MailKit.Extensions;
+using NETCore.MailKit.Infrastructure.Internal;
 using Proj.Api.Infrastructure;
 using Proj.Api.Infrastructure.JwtUtils;
 using Proj.Config;
@@ -32,7 +36,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(option =>
 {
     option.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, "Melodia.Api.xml"), true);
-    option.SwaggerDoc("v1",new Microsoft.OpenApi.Models.OpenApiInfo()
+    option.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo()
     {
         Title = "Melodia.Api",
         Description = "پروژه تمرینی سایت موزیک"
@@ -48,6 +52,16 @@ builder.Services.RegisterApiDependency();
 CommonBootstrapper.Init(builder.Services);
 CommonAspNetCoreBootstrapper.Init(builder.Services);
 builder.Services.AddJwtAuthentication(builder.Configuration);
+builder.Services.Configure<KavenegarSettings>(builder.Configuration.GetSection("Kavenegar"));
+
+builder.Services.AddDistributedMemoryCache(); // <-- این خط ارائه‌دهنده حافظه موقت را اضافه می‌کند
+builder.Services.AddSession(options =>
+{
+    // تنظیم تایمر انقضای Session (به عنوان مثال 2 دقیقه)
+    options.IdleTimeout = TimeSpan.FromMinutes(2);
+    options.Cookie.HttpOnly = true; // امنیت بیشتر
+    options.Cookie.IsEssential = true; // برای GDPR ضروری است
+});// فعال‌سازی Session
 
 var app = builder.Build();
 
@@ -61,6 +75,7 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseCors("MelodiaApi");
+app.UseSession();
 app.UseAuthentication();
 app.UseAuthorization();
 app.UseApiCustomExceptionHandler();

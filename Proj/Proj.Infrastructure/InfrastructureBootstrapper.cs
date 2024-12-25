@@ -6,6 +6,7 @@ using Proj.Domain.MusicAgg.Repositories;
 using Proj.Domain.MusicAlbumAgg.Repositories;
 using Proj.Domain.RoleAgg.Repositories;
 using Proj.Domain.UserAgg.Repositories;
+using Proj.Domain.VerificationAgg.Repositories;
 using Proj.Infrastructure.Persistent.Dapper;
 using Proj.Infrastructure.Persistent.EF;
 using Proj.Infrastructure.Persistent.EF.ArtistAgg;
@@ -14,6 +15,7 @@ using Proj.Infrastructure.Persistent.EF.MusicAgg;
 using Proj.Infrastructure.Persistent.EF.MusicAlbumAgg;
 using Proj.Infrastructure.Persistent.EF.RoleAgg;
 using Proj.Infrastructure.Persistent.EF.UserAgg;
+using Proj.Infrastructure.Persistent.EF.VerificationAgg;
 
 namespace Proj.Infrastructure;
 
@@ -27,6 +29,7 @@ public static class InfrastructureBootstrapper
         services.AddTransient<IMusicRepository, MusicRepository>();
         services.AddTransient<IUserRepository, UserRepository>();
         services.AddTransient<IRoleRepository, RoleRepository>();
+        services.AddTransient<IVerificationRepository, VerificationRepository>();
 
         services.AddTransient<DapperContext>(_ =>
         {

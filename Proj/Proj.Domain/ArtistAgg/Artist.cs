@@ -45,6 +45,8 @@ public class Artist : AggregateRoot
         NullOrEmptyDomainDataException.CheckString(artistImg, nameof(artistImg));
         ArtistImg = ArtistImg;
     }
+
+    //Guard
     private void Guard(string artistName, string slug, IArtistDomainService domainService)
     {
         if (slug != Slug)

@@ -38,6 +38,8 @@ public class Category : AggregateRoot
         NullOrEmptyDomainDataException.CheckString(imageName, nameof(imageName));
         ImageName = imageName;
     }
+
+    //Guard
     private void Guard(string title, string slug, ICategoryDomainService domainService)
     {
         NullOrEmptyDomainDataException.CheckString(title, nameof(title));
