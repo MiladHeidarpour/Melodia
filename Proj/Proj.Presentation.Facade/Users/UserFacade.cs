@@ -14,6 +14,7 @@ using Common.Application.SecurityUtil;
 using Proj.Application.Users.Create;
 using Proj.Application.Users.Delete;
 using Proj.Application.Users.Edit;
+using Proj.Query.Users.GetList;
 using Proj.Query.Users.UserTokens.GetByRefreshToken;
 using Proj.Query.Users.UserTokens.GetByJwtToken;
 
@@ -61,6 +62,11 @@ public class UserFacade : IUserFacade
             return OperationResult.Success();
         }
         return OperationResult.Error();
+    }
+
+    public async Task<List<UserDto?>> GetUserList()
+    {
+        return await _mediator.Send(new GetUserListQuery());
     }
 
     public async Task<UserDto?> GetUserByPhoneNumber(string phoneNumber)

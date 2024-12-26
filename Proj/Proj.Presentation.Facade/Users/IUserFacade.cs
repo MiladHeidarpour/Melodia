@@ -22,6 +22,7 @@ public interface IUserFacade
     Task<OperationResult> RemoveToken(RemoveUserTokenCommand command);
 
     //Query
+    Task<List<UserDto?>> GetUserList();
     Task<UserDto?> GetUserByPhoneNumber(string phoneNumber);
     Task<UserDto?> GetUserByEmail(string email);
     Task<UserDto?> GetUserById(long userId);

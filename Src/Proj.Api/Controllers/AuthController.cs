@@ -130,7 +130,7 @@ public class AuthController : ApiController
             return CommandResult(OperationResult<long?>.Error("کد وارد شده معتبر نیست"));
         }
 
-        if (verificationInfo.ExpirationTime > DateTime.Now && verificationInfo.IsVerified == false)
+        if (verificationInfo.ExpirationTime > DateTime.UtcNow && verificationInfo.IsVerified == false)
         {
             if (code == verificationInfo.VerificationCode)
             {
@@ -411,7 +411,7 @@ WhatsApp : wa.me/+98{command.UserIdentifier.Substring(1)}");
         {
             UserIdentifier = userIdentifier,
             VerificationCode = verificationCode,
-            ExpirationTime = DateTime.Now.AddMinutes(1).AddSeconds(30),
+            ExpirationTime = DateTime.UtcNow.AddMinutes(1).AddSeconds(30),
             IsVerified = false,
         });
 

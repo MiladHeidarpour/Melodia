@@ -4,7 +4,7 @@ using MimeKit;
 
 namespace Common.AspNetCore.EmailUtil;
 
-public class EmailService:IEmailService
+public class EmailService : IEmailService
 {
     private readonly string _smtpServer;
     private readonly int _smtpPort;
@@ -26,7 +26,12 @@ public class EmailService:IEmailService
         emailMessage.To.Add(new MailboxAddress("سیشسیشسیشسیشسی", recipientEmail));
         emailMessage.Subject = subject;
 
-        var body = new TextPart("plain")
+        //var body = new TextPart("plain")
+        //{
+        //    Text = message
+        //};
+
+        var body = new TextPart("html")
         {
             Text = message
         };
