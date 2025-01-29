@@ -18,18 +18,12 @@ internal class DeleteMusicAlbumCommandHandler : IBaseCommandHandler<DeleteMusicA
 
     public async Task<OperationResult> Handle(DeleteMusicAlbumCommand request, CancellationToken cancellationToken)
     {
-        var musicAlbum = await _repository.GetTracking(request.AlbumId);
-        if (musicAlbum == null)
-            return OperationResult.NotFound("آلبوم مورد نظر یافت نشد");
-
         var result = await _repository.DeleteMusicAlbum(request.AlbumId);
-        if (result == true)
+        if (result == false)
         {
-            await _repository.Save();
-            _fileService.DeleteFile(musicAlbum.CoverImg, Directories.MusicAlbumCovers);
-            return OperationResult.Success("حذف آلبوم با موفقیت انجام شد");
+            return OperationResult.Error("امکان حذف این آلبوم وجود ندارد");
         }
-
-        return OperationResult.Error("امکان حذف این آلبوم وجود ندارد");
+        await _repository.Save();
+        return OperationResult.Success("حذف آلبوم با موفقیت انجام شد");
     }
 }

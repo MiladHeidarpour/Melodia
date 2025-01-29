@@ -27,4 +27,11 @@
     <ProjectReference Include="..\..\Proj\Proj.Config\Proj.Config.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\Images\Artists\" />
+    <Folder Include="wwwroot\Images\Categories\" />
+    <Folder Include="wwwroot\Images\MusicAlbumCovers\" />
+    <Folder Include="wwwroot\TrackFiles\" />
+  </ItemGroup>
+
 </Project>

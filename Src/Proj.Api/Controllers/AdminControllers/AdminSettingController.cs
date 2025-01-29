@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using Proj.Api.ViewModels.Admins.Settings;
 using Proj.Presentation.Facade.Users;
+using Proj.Query.Users.Dtos;
 
 namespace Proj.Api.Controllers.AdminControllers;
 public class AdminSettingController : AdminApiController
@@ -18,15 +19,42 @@ public class AdminSettingController : AdminApiController
         _emailService = emailService;
     }
 
+    #region Query
+
+
+    #endregion
+
+    /// <summary>
+    /// ارسال ایمیل به کاربران
+    /// </summary>
+    /// <param name="command">اطلاعات ایمیل</param>
+    #region Command
+
     [HttpPost("EmailMessage")]
     public async Task<ApiResult> EmailMessage(EmailMessageVM command)
     {
-        var usersEmails = (await _userFacade.GetUserList()).Where(f => f.Email.IsNullOrEmpty() == false);
+        List<UserDto>? users = new List<UserDto>();
 
-        foreach (var user in usersEmails)
+        if (command.ForAll == true)
         {
-            await _emailService.SendEmail(user.Email, command.Subject, command.Body);
+            users = (await _userFacade.GetUserList()).Where(f => f.Email.IsNullOrEmpty() == false).ToList();
         }
-        return CommandResult(OperationResult.Success());
+        else
+        {
+            users = command?.Users;
+        }
+
+        if (users != null)
+        {
+            foreach (var item in users)
+            {
+                await _emailService.SendEmail(item.Email, command.Subject, command.Body);
+            }
+            return CommandResult(OperationResult.Success());
+        }
+
+        return CommandResult(OperationResult.Error("کاربری یافت نشد"));
     }
+
+    #endregion
 }

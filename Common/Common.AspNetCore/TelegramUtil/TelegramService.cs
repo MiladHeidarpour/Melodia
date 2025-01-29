@@ -1,47 +1,53 @@
 ﻿using System.Net;
 using System.Text;
 using System.Text.Json;
+using Telegram.Bot;
+using Telegram.Bot.Types.ReplyMarkups;
 
 namespace Common.AspNetCore.TelegramUtil;
 
 public class TelegramService : ITelegramService
 {
     private readonly string _botToken = "7619510132:AAEz7KJtBfsy1Eayo6Gottb4X0xSjEHHZ4o";
-    private readonly HttpClient _httpClient;
+    private readonly string _chatId = "-1002366986036";
+    private readonly TelegramBotClient _botClient;
+    //private readonly HttpClient _httpClient;
     public TelegramService()
     {
-        //var proxy = new WebProxy("http://138.91.159.185:80") // آدرس و پورت پروکسی خود را وارد کنید
+        //var handler = new HttpClientHandler()
         //{
-        //    Credentials = new NetworkCredential("username", "password") // در صورت نیاز به احراز هویت
+        //    Proxy = new WebProxy("http://142.132.171.131:9090"), // پروکسی خود را وارد کنید
+        //    UseProxy = true,
         //};
 
-        //var handler = new HttpClientHandler
-        //{
-        //    Proxy = proxy,
-        //    UseProxy = true
-        //};
+        // ایجاد HttpClient با handler پروکسی
+        var httpClient = new HttpClient(/*handler*/)
+        {
+            Timeout = TimeSpan.FromMinutes(1)
+        };
 
-        //// ایجاد HttpClient با استفاده از HttpClientHandler
-        //_httpClient = new HttpClient(handler);
-        _httpClient = new HttpClient();
+        // ایجاد TelegramBotClient با HttpClient
+        _botClient = new TelegramBotClient(_botToken, httpClient);
     }
     public async Task SendMessage(string message)
     {
-        try
-        {
-            var url = $"https://api.telegram.org/bot{_botToken}/sendMessage";
-            var data = new
-            {
-                chat_id = "@MelodiaUser",
-                text = message
-            };
+        await _botClient.SendMessage(_chatId, text: message);
 
-            var content = new StringContent(JsonSerializer.Serialize(data), Encoding.UTF8, "application/json");
-            var response = await _httpClient.PostAsync(url, content);
-        }
-        catch (Exception e)
-        {
-            //
-        }
+        //try
+        //{
+        //    var url = $"https://api.telegram.org/bot{_botToken}/sendMessage";
+        //    var data = new
+        //    {
+        //        chat_id = "@MelodiaUser",
+        //        text = message
+        //    };
+
+        //    var content = new StringContent(JsonSerializer.Serialize(data), Encoding.UTF8, "application/json");
+        //    var response = await _httpClient.PostAsync(url, content);
+        //}
+        //catch (Exception e)
+        //{
+        //    //
+        //}
     }
 }

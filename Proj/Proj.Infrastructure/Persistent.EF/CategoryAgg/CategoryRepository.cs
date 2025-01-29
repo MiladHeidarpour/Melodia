@@ -1,4 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Common.Application;
+using Common.Application.FileUtil.Interfaces;
+using Microsoft.EntityFrameworkCore;
+using Proj.Application._Utilities;
 using Proj.Domain.ArtistAgg;
 using Proj.Domain.CategoryAgg;
 using Proj.Domain.CategoryAgg.Repositories;
@@ -8,8 +11,10 @@ namespace Proj.Infrastructure.Persistent.EF.CategoryAgg;
 
 internal class CategoryRepository : BaseRepository<Category>, ICategoryRepository
 {
-    public CategoryRepository(ProjContext context) : base(context)
+    private readonly IFileService _fileService;
+    public CategoryRepository(ProjContext context, IFileService fileService) : base(context)
     {
+        _fileService = fileService;
     }
 
     public async Task<bool> DeleteCategory(long categoryId)
@@ -25,6 +30,7 @@ internal class CategoryRepository : BaseRepository<Category>, ICategoryRepositor
             return false;
 
         _context.Remove(category);
+        _fileService.DeleteFile(Directories.CategoryImages, category.ImageName);
         return true;
     }
 }

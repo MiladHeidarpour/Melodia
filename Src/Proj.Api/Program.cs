@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using NETCore.MailKit.Extensions;
 using NETCore.MailKit.Infrastructure.Internal;
+using Proj.Api.Hubs;
 using Proj.Api.Infrastructure;
 using Proj.Api.Infrastructure.JwtUtils;
 using Proj.Config;
@@ -53,15 +54,16 @@ CommonBootstrapper.Init(builder.Services);
 CommonAspNetCoreBootstrapper.Init(builder.Services);
 builder.Services.AddJwtAuthentication(builder.Configuration);
 builder.Services.Configure<KavenegarSettings>(builder.Configuration.GetSection("Kavenegar"));
+builder.Services.AddSignalR();
 
-builder.Services.AddDistributedMemoryCache(); // <-- این خط ارائه‌دهنده حافظه موقت را اضافه می‌کند
-builder.Services.AddSession(options =>
-{
-    // تنظیم تایمر انقضای Session (به عنوان مثال 2 دقیقه)
-    options.IdleTimeout = TimeSpan.FromMinutes(2);
-    options.Cookie.HttpOnly = true; // امنیت بیشتر
-    options.Cookie.IsEssential = true; // برای GDPR ضروری است
-});// فعال‌سازی Session
+//builder.Services.AddDistributedMemoryCache(); // <-- این خط ارائه‌دهنده حافظه موقت را اضافه می‌کند
+//builder.Services.AddSession(options =>
+//{
+//    // تنظیم تایمر انقضای Session (به عنوان مثال 2 دقیقه)
+//    options.IdleTimeout = TimeSpan.FromMinutes(2);
+//    options.Cookie.HttpOnly = true; // امنیت بیشتر
+//    options.Cookie.IsEssential = true; // برای GDPR ضروری است
+//});// فعال‌سازی Session
 
 var app = builder.Build();
 
@@ -72,13 +74,24 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI(Theme.Vs2022);
 }
 
+
 app.UseHttpsRedirection();
 app.UseStaticFiles();
+
+app.UseRouting();
+
 app.UseCors("MelodiaApi");
-app.UseSession();
+//app.UseSession();
 app.UseAuthentication();
 app.UseAuthorization();
+
 app.UseApiCustomExceptionHandler();
+//app.UseUseGetOnlineUserHandler();
+
 app.MapControllers();
+app.UseEndpoints(endpoints =>
+{
+    endpoints.MapHub<OnlineUserHub>("/ChatHub");
+});
 
 app.Run();

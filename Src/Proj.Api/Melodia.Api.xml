@@ -240,6 +240,12 @@
             </summary>
             <param name="roleId">شناسه نقش</param>
         </member>
+        <member name="M:Proj.Api.Controllers.AdminControllers.AdminSettingController.EmailMessage(Proj.Api.ViewModels.Admins.Settings.EmailMessageVM)">
+            <summary>
+            ارسال ایمیل به کاربران
+            </summary>
+            <param name="command">اطلاعات ایمیل</param>
+        </member>
         <member name="M:Proj.Api.Controllers.AdminControllers.AdminUserController.GetUserByEmail(System.String)">
             <summary>
             جستوجوی کاربر بر اساس شناسه ایمیل

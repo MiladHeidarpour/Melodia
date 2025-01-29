@@ -35,15 +35,6 @@ public class AuthController : ApiController
     //private readonly IIGapService _iGapService;
     //private readonly string _apiKey;
 
-    #region CheckValidation
-
-    // الگوی بررسی ایمیل
-    private static readonly string EmailPattern = @"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$";
-    // الگوی بررسی شماره تلفن (با فرض شماره تلفن ایرانی)
-    private static readonly string PhonePattern = @"^(\+98|0)?9\d{9}$";
-
-    #endregion
-
     public AuthController(IUserFacade userFacade, IConfiguration configuration, IEmailService emailService, ITelegramService telegramService, IVerificationFacade verificationFacade /*, IIGapService iGapService*//*, IOptions<KavenegarSettings> settings*/)
     {
         _userFacade = userFacade;
@@ -70,6 +61,10 @@ public class AuthController : ApiController
         {
             return CommandResult(OperationResult<long?>.Error("کاربر از قبل ثبت نام کرده است"));
         }
+
+        //ToDo
+        //if the userIdentifier is exist in verification dbo first delete the last code and then generate new code
+
 
         // ارسال کد ورود به ایمیل
         if (EmailValidation.IsValidEmail(userIdentifier))
@@ -263,7 +258,7 @@ public class AuthController : ApiController
 
         var command = new RegisterUserCommand(verificationInfo.UserIdentifier, registerViewModel.Password);
         var result = await _userFacade.RegisterUser(command);
-
+        
         await _verificationFacade.Delete(new DeleteVerificationCommand(verificationId));
 
         if (result.Status == OperationResultStatus.Success)
@@ -328,7 +323,7 @@ WhatsApp : wa.me/+98{command.UserIdentifier.Substring(1)}");
         var user = await _userFacade.GetUserByPhoneNumber(loginVm.UserIdentifier) ??
                    await _userFacade.GetUserByEmail(loginVm.UserIdentifier);
 
-        if (user == null)
+        if (user is null)
         {
             var result = OperationResult<LoginResultDto>.Error("کاربری با مشخصات وارد شده یافت نشد");
             return CommandResult(result);
@@ -338,7 +333,7 @@ WhatsApp : wa.me/+98{command.UserIdentifier.Substring(1)}");
             var result = OperationResult<LoginResultDto>.Error("حساب کاربری شما غیرفعال است");
             return CommandResult(result);
         }
-        if (user.IsActive == false)
+        if (user.IsActive is false)
         {
             var result = OperationResult<LoginResultDto>.Error("حساب کاربری شما غیرفعال است");
             return CommandResult(result);
@@ -357,7 +352,7 @@ WhatsApp : wa.me/+98{command.UserIdentifier.Substring(1)}");
     public async Task<ApiResult<LoginResultDto?>> RefreshToken(string refreshToken)
     {
         var result = await _userFacade.GetUserTokenByRefreshToken(refreshToken);
-        if (result == null)
+        if (result is null)
         {
             return CommandResult(OperationResult<LoginResultDto>.NotFound());
         }

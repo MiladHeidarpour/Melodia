@@ -18,20 +18,15 @@ internal class DeleteArtistCommandHandler : IBaseCommandHandler<DeleteArtistComm
 
     public async Task<OperationResult> Handle(DeleteArtistCommand request, CancellationToken cancellationToken)
     {
-        var artist = await _repository.GetTracking(request.ArtistId);
-
-        if (artist == null)
-            return OperationResult.NotFound("آرتیست مورد نظر یافت نشد");
 
         var result = await _repository.DeleteArtist(request.ArtistId);
 
-        if (result)
+        if (result == false)
         {
-            await _repository.Save();
-            _fileService.DeleteFile(Directories.ArtistImages, artist.ArtistImg);
-            return OperationResult.Success("حذف آرتیست با موفقیت انجام شد");
+            return OperationResult.Error("امکان حذف این آرتیست وجود ندارد");
         }
 
+        await _repository.Save();
         return OperationResult.Error("امکان حذف این آرتیست وجود ندارد");
     }
 }

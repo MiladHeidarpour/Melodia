@@ -1,4 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Common.Application.FileUtil.Interfaces;
+using Microsoft.EntityFrameworkCore;
+using Proj.Application._Utilities;
 using Proj.Domain.ArtistAgg;
 using Proj.Domain.ArtistAgg.Repositories;
 using Proj.Infrastructure._Utilities;
@@ -7,8 +9,10 @@ namespace Proj.Infrastructure.Persistent.EF.ArtistAgg;
 
 internal class ArtistRepository : BaseRepository<Artist>, IArtistRepository
 {
-    public ArtistRepository(ProjContext context) : base(context)
+    private readonly IFileService _fileService;
+    public ArtistRepository(ProjContext context, IFileService fileService) : base(context)
     {
+        _fileService = fileService;
     }
 
     public async Task<bool> DeleteArtist(long artistId)
@@ -22,6 +26,8 @@ internal class ArtistRepository : BaseRepository<Artist>, IArtistRepository
 
         if (isExistMusic)
             return false;
+
+        _fileService.DeleteFile(Directories.ArtistImages, artist.ArtistImg);
 
         _context.Artists.Remove(artist);
         return true;

@@ -9,31 +9,21 @@ namespace Proj.Application.Categories.Delete;
 internal class DeleteCategoryCommandHandler : IBaseCommandHandler<DeleteCategoryCommand>
 {
     private readonly ICategoryRepository _repository;
-    private readonly ICategoryDomainService _domainService;
-    private readonly IFileService _fileService;
-    public DeleteCategoryCommandHandler(ICategoryRepository repository, ICategoryDomainService domainService, IFileService fileService)
+    public DeleteCategoryCommandHandler(ICategoryRepository repository)
     {
         _repository = repository;
-        _domainService = domainService;
-        _fileService = fileService;
     }
 
     public async Task<OperationResult> Handle(DeleteCategoryCommand request, CancellationToken cancellationToken)
     {
-        var category = await _repository.GetTracking(request.CategoryId);
-
-        if (category == null)
-            return OperationResult.NotFound("دسته بندی یافت نشد");
-
         var result = await _repository.DeleteCategory(request.CategoryId);
 
-        if (result)
+        if (result == false)
         {
-            await _repository.Save();
-            _fileService.DeleteFile(Directories.CategoryImages, category.ImageName);
-            return OperationResult.Success("حذف دسته بندی با موفقیت انجام شد");
+            return OperationResult.Error("امکان حذف این دسته بندی وجود ندارد");
         }
 
-        return OperationResult.Error("امکان حذف این دسته بندی وجود ندارد");
+        await _repository.Save();
+        return OperationResult.Success("حذف دسته بندی با موفقیت انجام شد");
     }
 }

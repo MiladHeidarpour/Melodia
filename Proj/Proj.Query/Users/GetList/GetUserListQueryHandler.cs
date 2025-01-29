@@ -17,7 +17,8 @@ internal class GetUserListQueryHandler : IQueryHandler<GetUserListQuery, List<Us
 
     public async Task<List<UserDto?>> Handle(GetUserListQuery request, CancellationToken cancellationToken)
     {
-        var user = await _context.Users.OrderByDescending(f => f.CreationDate).ToListAsync(cancellationToken);
+        var userRole = await _context.Roles.FirstOrDefaultAsync(f => f.Title == "User", cancellationToken);
+        var user = await _context.Users.Where(f => f.RoleId == userRole.Id).OrderByDescending(f => f.CreationDate).ToListAsync(cancellationToken);
         return user.Map();
     }
 }

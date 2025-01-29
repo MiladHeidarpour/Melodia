@@ -34,7 +34,6 @@ public class AdminArtistController : AdminApiController
     }
 
 
-
     /// <summary>
     /// جستوجوی آرتیست بر اساس شناسه آرتیست
     /// </summary>
@@ -46,7 +45,6 @@ public class AdminArtistController : AdminApiController
         var artist = await _facade.GetArtistsById(artistId);
         return QueryResult(artist);
     }
-
 
 
     /// <summary>
@@ -62,7 +60,6 @@ public class AdminArtistController : AdminApiController
     }
 
 
-
     /// <summary>
     /// لیستی از تمام آرتیست ها
     /// </summary>
@@ -73,10 +70,10 @@ public class AdminArtistController : AdminApiController
         var artists = await _facade.GetArtistList();
         return QueryResult(artists);
     }
+
     #endregion
 
     #region Command
-
 
     /// <summary>
     /// ثبت آرتیست
@@ -98,7 +95,6 @@ public class AdminArtistController : AdminApiController
     }
 
 
-
     /// <summary>
     /// ویرایش آرتیست
     /// </summary>
@@ -118,7 +114,6 @@ public class AdminArtistController : AdminApiController
         });
         return CommandResult(result);
     }
-
 
 
     /// <summary>
