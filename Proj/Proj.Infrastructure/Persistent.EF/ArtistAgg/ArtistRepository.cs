@@ -22,7 +22,7 @@ internal class ArtistRepository : BaseRepository<Artist>, IArtistRepository
         if (artist == null)
             return false;
 
-        var isExistMusic = await _context.Musics.AnyAsync(f => f.ArtistMusics.Exists(f => f.Id == artistId));
+        var isExistMusic = await _context.Musics.Include(f=>f.ArtistMusics).AnyAsync(f => f.ArtistMusics.Any(f => f.ArtistId == artistId));
 
         if (isExistMusic)
             return false;

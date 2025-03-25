@@ -27,6 +27,6 @@ internal class DeleteArtistCommandHandler : IBaseCommandHandler<DeleteArtistComm
         }
 
         await _repository.Save();
-        return OperationResult.Error("امکان حذف این آرتیست وجود ندارد");
+        return OperationResult.Success("حذف با موفقیت انجام شد");
     }
 }

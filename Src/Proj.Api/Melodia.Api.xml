@@ -343,6 +343,52 @@
             ساهت توکن کاربر
             </summary>
         </member>
+        <member name="M:Proj.Api.Controllers.CategoryController.GetCategoryById(System.Int64)">
+            <summary>
+            جستوجوی دسته بندی بر اساس شناسه
+            </summary>
+            <param name="categoryId">شناسه دسته بندی</param>
+            <returns>دسته بندی</returns>
+        </member>
+        <member name="M:Proj.Api.Controllers.CategoryController.GetCategoryBySlug(System.String)">
+            <summary>
+            جستوجوی دسته بندی بر اساس شناسه اسلاگ
+            </summary>
+            <param name="slug">شناسه اسلاگ</param>
+            <returns>دسته بندی</returns>
+        </member>
+        <member name="M:Proj.Api.Controllers.CategoryController.GetCategoryList">
+            <summary>
+            لیستی از تمام دسته بندی ها
+            </summary>
+            <returns>لیستی از تمام دسته بندی ها</returns>
+        </member>
+        <member name="M:Proj.Api.Controllers.MusicController.GetMusicById(System.Int64)">
+            <summary>
+            جستوجوی موزیک بر اساس شناسه موزیک
+            </summary>
+            <param name="musicId">شناسه موزیک</param>
+            <returns>موزیک</returns>
+        </member>
+        <member name="M:Proj.Api.Controllers.MusicController.GetMusicBySlug(System.String)">
+            <summary>
+            جستوجوی موزیک بر اساس شناسه اسلاگ
+            </summary>
+            <param name="slug">شناسه اسلاگ</param>
+            <returns>موزیک</returns>
+        </member>
+        <member name="M:Proj.Api.Controllers.MusicController.GetMusicList">
+            <summary>
+            لیستی از تمام موزیک ها
+            </summary>
+            <returns>لیستی از تمام موزیک ها</returns>
+        </member>
+        <member name="M:Proj.Api.Controllers.MusicController.NewReleaseSongs">
+            <summary>
+            New Release Songs
+            </summary>
+            <returns>لیستی از تمام موزیک های جدید</returns>
+        </member>
         <member name="T:Proj.Api.ViewModels.Admins.Musics.CreateMusicVM">
             <summary>
             مدل ثبت موزیک

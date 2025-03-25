@@ -13,14 +13,14 @@ public class MapperProfile : Profile
         var model = new List<ArtistMusic>();
         artistMusicVms.ForEach(music =>
         {
-            model.Add(new ArtistMusic(music.ArtistId, music.MusicId, music.ArtistType));
+            model.Add(new ArtistMusic(music.ArtistId, 0, music.ArtistType));
         });
         return model;
     }
 
     public static ArtistMusic Map(AddArtistMusicVM artistMusicVms)
     {
-        return new ArtistMusic(artistMusicVms.ArtistId, artistMusicVms.MusicId, artistMusicVms.ArtistType);
+        return new ArtistMusic(artistMusicVms.ArtistId, 0, artistMusicVms.ArtistType);
     }
     public MapperProfile()
     {

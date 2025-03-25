@@ -9,10 +9,6 @@ public class AddArtistMusicVM
     [Required(ErrorMessage = "آرتیست را وارد کنید")]
     public long ArtistId { get; set; }
 
-    [Display(Name = "موزیک")]
-    [Required(ErrorMessage = "موزیک را وارد کنید")]
-    public long MusicId { get; set; }
-
     [Display(Name = "نوع آرتیست")]
     [Required(ErrorMessage = "نوع آرتیست را وارد کنید")]
     public ArtistType ArtistType { get; set; }

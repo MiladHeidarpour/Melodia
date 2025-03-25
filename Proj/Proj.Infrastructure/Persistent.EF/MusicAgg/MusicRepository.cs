@@ -21,4 +21,9 @@ internal class MusicRepository : BaseRepository<Music>, IMusicRepository
         _context.Musics.Remove(music);
         return true;
     }
+    public async Task<List<Music>> GetAlbumMusics(long albumId)
+    {
+        var albumMusics = await _context.Musics.Where(f => f.AlbumId == albumId).ToListAsync();
+        return albumMusics;
+    }
 }

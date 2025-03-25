@@ -15,6 +15,7 @@ using Proj.Query.Musics.GetByFilter;
 using Proj.Query.Musics.GetById;
 using Proj.Query.Musics.GetBySlug;
 using Proj.Query.Musics.GetList;
+using Proj.Query.Musics.NewReleaseSongs;
 
 namespace Proj.Presentation.Facade.Musics;
 
@@ -75,6 +76,11 @@ internal class MusicFacade : IMusicFacade
     public async Task<List<MusicDto>> GetMusicList()
     {
         return await _mediator.Send(new GetMusicListQuery());
+    }
+
+    public async Task<List<MusicDto>> NewReleaseSongs()
+    {
+        return await _mediator.Send(new NewReleaseSongsQuery());
     }
 
     public async Task<ArtistMusicDto> GetArtistMusicById(long artistMusicId)

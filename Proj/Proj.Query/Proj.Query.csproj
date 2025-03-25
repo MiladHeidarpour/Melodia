@@ -10,12 +10,16 @@
     <Folder Include="Artists\Mapper\" />
     <Folder Include="Artists\GetByFilter\" />
     <Folder Include="Artists\GetBySlug\" />
+    <Folder Include="Artists\PopularArtists\" />
     <Folder Include="Categories\Mapper\" />
     <Folder Include="Categories\GetBySlug\" />
+    <Folder Include="MusicAlbums\TopAlbums\" />
     <Folder Include="Musics\ArtistMusic\GetList\" />
     <Folder Include="Musics\Mapper\" />
     <Folder Include="Musics\GetById\" />
     <Folder Include="Musics\GetBySlug\" />
+    <Folder Include="Musics\TrendingSongs\" />
+    <Folder Include="Musics\WeeklyTopSongs\" />
     <Folder Include="Roles\Dtos\" />
     <Folder Include="Roles\GetById\" />
     <Folder Include="Roles\GetList\" />

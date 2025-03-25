@@ -30,6 +30,7 @@ public interface IMusicFacade
     Task<MusicDto?> GetMusicById(long musicId);
     Task<MusicDto?> GetMusicBySlug(string slug);
     Task<List<MusicDto>> GetMusicList();
+    Task<List<MusicDto>> NewReleaseSongs();
 
     //ArtistMusic Query
     Task<ArtistMusicDto> GetArtistMusicById(long artistMusicId);
